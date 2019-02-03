@@ -1,13 +1,11 @@
-import { Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { Error404PageComponent, Error404PageResolver } from './core';
+import { LoginComponent } from './login/login.component';
+import { NgModule } from '@angular/core';
 
 export const rootRoutes: Routes = [
-  { path: '', loadChildren: './dashboard/dashboard.module#DashboardModule' },
-  { path: 'forms', loadChildren: './forms/forms.module#FormsModule' },
-  { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },
-  { path: 'charts', loadChildren: './charts/charts.module#ChartsModule' },
-  { path: 'utils', loadChildren: './utils/utils.module#UtilsModule' },
-  { path: 'layouts', loadChildren: './layouts/layouts.module#LayoutsModule' },
+  { path: 'login', component: LoginComponent},
+  { path: '', loadChildren: './front-page/front-page.module#FrontPageModule'},
   {
     path: '404',
     component: Error404PageComponent,
@@ -21,3 +19,9 @@ export const rootRoutes: Routes = [
     resolve: { data: Error404PageResolver }
   }
 ];
+
+@NgModule({
+  imports: [ RouterModule.forRoot(rootRoutes) ],
+  exports: [RouterModule]
+})
+export class AppRoutes{}
