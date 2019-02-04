@@ -19,6 +19,7 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
+import { AuthGuard } from './auth/auth.guard';
 
 
 @NgModule({
@@ -47,7 +48,7 @@ import { RecoverPasswordComponent } from './recover-password/recover-password.co
     FormsModule
   ],
   bootstrap: [AppComponent],
-  providers: [
+  providers: [AuthGuard,
     {
       provide: APP_BASE_HREF,
       useValue: `${environment.BASE_URL}`

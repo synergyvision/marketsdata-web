@@ -3,6 +3,8 @@ import { SideMenuService } from '../../side-menu/side-menu.service';
 import { ResponsiveBreakpointsService } from '../../responsive-breakpoints/responsive-breakpoints.service';
 import { APP_BASE_HREF } from '@angular/common';
 import { filter } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-top-navbar-content',
@@ -17,7 +19,8 @@ export class TopNavbarContentComponent {
   sideMenuVisible = true;
   baseUrl = '';
 
-  constructor(
+  constructor(public afAuth: AngularFireAuth,
+    public router: Router,
     private sideMenuService: SideMenuService,
     private responsiveService: ResponsiveBreakpointsService,
     @Inject(APP_BASE_HREF) private baseHref: string
@@ -61,5 +64,12 @@ export class TopNavbarContentComponent {
         // console.log('all toggle');
       }
     );
+  }
+
+  onLogout(){
+    this.afAuth.auth.signOut().then(() => {
+      console.log('Usuario deslogeado correctamente');
+      this.router.navigate(['/login']);
+   }).catch(error => console.log(error));
   }
 }
