@@ -8,7 +8,10 @@ import { TransferHttpCacheModule } from '@nguniversal/common';
 import { APP_BASE_HREF } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from './../environments/environment';
-
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { rootRoutes } from './app.routes';
 
 import { CoreModule } from './core/core.module';
@@ -24,6 +27,10 @@ import { LoginComponent } from './login/login.component';
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'my-app'}),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, 
+    AngularFireAuthModule, 
+    AngularFireStorageModule,
     HttpClientModule,
     RouterModule.forRoot(rootRoutes, {
       // enableTracing :true, // For debugging
