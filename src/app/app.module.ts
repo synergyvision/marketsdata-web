@@ -13,17 +13,19 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { rootRoutes } from './app.routes';
-
+import { FormsModule } from '@angular/forms';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
+import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    RecoverPasswordComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'my-app'}),
@@ -41,7 +43,8 @@ import { LoginComponent } from './login/login.component';
     CoreModule,
     SharedModule,
     BrowserAnimationsModule,
-    TransferHttpCacheModule
+    TransferHttpCacheModule,
+    FormsModule
   ],
   bootstrap: [AppComponent],
   providers: [

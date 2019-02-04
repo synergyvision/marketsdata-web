@@ -1,42 +1,21 @@
-<!-- <div class="modal-size text-center">
-    <div class="col-sm-8 main-section ">
-        <div class="modal-content">
-            <div class="col-12 synergy-img">
-                <img src="../../assets/imgs/synergy-vision.jpg" alt="">
-            </div>
-            <form class="col-12">
-                <div class="form-group">
-                <input type="text" class="form-control" placeholder="Email">
-                </div>
-                <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password">
-                </div>
-                <div class="form-group">
-                <input class="btn btn-form" type="submit" value="LOGIN">
-                </div>
-            </form>
-        </div>
-    </div>
-</div> -->
-
-<!-- <div class="col-md-6">
+ <div class="col-md-6">
   <div class="card">
     <header class="row title">
       <div class="col-xs-12 text-center">
         <h2 class="main-title">Login Form</h2>
       </div>
     </header>
-    <form class="form-horizontal form-stacked" [formGroup]="formLogin">
+    <form name="form" class="form-horizontal form-stacked" #formLogin ="ngForm" (ngSubmit) = "loginUser()" novalidate>
       <div class="form-group">
-        <label class="form-label col-xs-12" [attr.for]="'email_4'">EMAIL ADDRESS<em>*</em></label>
+        <label class="form-label col-xs-12" for="email">EMAIL ADDRESS<em>*</em></label>
         <div class="col-xs-12">
-          <input type="email" class="form-control" formControlName="email" [id]="'email_4'" placeholder="Email">
+          <input type="email" class="form-control" #email ="ngModel" [(ngModel)]="userLogin.email" placeholder="Email" name="email" required>
         </div>
       </div>
       <div class="form-group">
-        <label class="form-label col-xs-12" [attr.for]="'password_4'">PASSWORD<em>*</em></label>
+        <label class="form-label col-xs-12">PASSWORD<em>*</em></label>
         <div class="col-xs-12">
-          <input type="password" class="form-control" formControlName="password" [id]="'password_4'" placeholder="Password">
+          <input type="password" class="form-control" #password="ngModel" [(ngModel)]="userLogin.password" placeholder="Password" name="password" required>
         </div>
       </div>
       <div class="form-group">
@@ -46,12 +25,19 @@
       </div>
       <div class="form-group">
         <div class="col-xs-12 text-center">
-        <input class="btn btn-form" type="submit" [disabled]="!formLogin.valid" value="LOGIN">
+          <a [routerLink]="['/recover-password']" class="recover-password">
+            Olvidé mi contraseña
+          </a>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12 text-center">
+            <input class="btn btn-form" type="submit" value="LOGIN">
         </div>
       </div>
     </form>
   </div>
-</div> -->
+</div> 
 
 <div class="col-md-6">
   <div class="card">
@@ -64,13 +50,13 @@
       <div class="form-group">
         <label class="form-label col-xs-12">EMAIL ADDRESS<em>*</em></label>
         <div class="col-xs-12">
-          <input type="email" class="form-control" #email="ngModel" [(ngModel)]="user.email" placeholder="Email"  name="email">
+          <input type="email" class="form-control" #email="ngModel" [(ngModel)]="userSignUp.email" placeholder="Email"  name="email">
         </div>
       </div>
       <div class="form-group">
         <label class="form-label col-xs-12">PASSWORD<em>*</em></label>
         <div class="col-xs-12">
-          <input type="password" class="form-control" #password="ngModel" [(ngModel)]="user.password" placeholder="Password" name="password">
+          <input type="password" class="form-control" #password="ngModel" [(ngModel)]="userSignUp.password" placeholder="Password" name="password">
         </div>
       </div>
       <div class="form-group">

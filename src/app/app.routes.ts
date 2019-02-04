@@ -1,10 +1,14 @@
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { Error404PageComponent, Error404PageResolver } from './core';
+
 import { LoginComponent } from './login/login.component';
-import { NgModule } from '@angular/core';
+import { RecoverPasswordComponent } from './recover-password/recover-password.component'
+
 
 export const rootRoutes: Routes = [
   { path: 'login', component: LoginComponent},
+  { path: 'recover-password', component: RecoverPasswordComponent},
   { path: '', loadChildren: './front-page/front-page.module#FrontPageModule'},
   {
     path: '404',
