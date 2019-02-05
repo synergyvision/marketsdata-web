@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+
 @Component({
   selector: 'app-recover-password',
   templateUrl: './recover-password.component.html',
@@ -7,7 +9,11 @@ import { Router } from '@angular/router';
 })
 export class RecoverPasswordComponent implements OnInit {
 
-  constructor(public router: Router) { }
+  user: any = {};
+
+  constructor(public router: Router,
+    public afAuth: AngularFireAuth
+    ) { }
 
   ngOnInit() {
   }
@@ -16,4 +22,11 @@ export class RecoverPasswordComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  onRecuperar(){
+    this.afAuth.auth.sendPasswordResetEmail(this.user.email)
+    .then(() => {
+      console.log("Correo enviado al usuario");
+    })
+    .catch(error => console.log(error));
+  }
 }
