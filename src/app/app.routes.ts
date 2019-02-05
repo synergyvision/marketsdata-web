@@ -4,10 +4,12 @@ import { Error404PageComponent, Error404PageResolver } from './core';
 import { LoginComponent } from './login/login.component';
 import { RecoverPasswordComponent } from './recover-password/recover-password.component'
 import { AuthGuard } from './auth/auth.guard';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 export const rootRoutes: Routes = [
-  { path: 'login', component: LoginComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'change-password', component: ChangePasswordComponent },
   { path: 'recover-password', component: RecoverPasswordComponent },
   { path: '', loadChildren: './front-page/front-page.module#FrontPageModule', canActivate: [AuthGuard] },
   {

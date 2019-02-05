@@ -20,13 +20,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 import { AuthGuard } from './auth/auth.guard';
-
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RecoverPasswordComponent
+    RecoverPasswordComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'my-app'}),
