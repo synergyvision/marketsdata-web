@@ -1,9 +1,11 @@
-import { Component, Input, ViewEncapsulation, Inject } from '@angular/core';
+import { Component, Input, ViewEncapsulation, Inject, OnInit } from '@angular/core';
 import { SideMenuService } from '../../side-menu/side-menu.service';
 import { ResponsiveBreakpointsService } from '../../responsive-breakpoints/responsive-breakpoints.service';
 import { APP_BASE_HREF } from '@angular/common';
 import { filter } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
+import { UserdetailService } from '../../../services/userdetail.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
@@ -12,14 +14,18 @@ import { AngularFireAuth } from '@angular/fire/auth';
   templateUrl: './top-navbar-content.component.html',
   encapsulation: ViewEncapsulation.None
 })
-export class TopNavbarContentComponent {
+export class TopNavbarContentComponent  implements OnInit {
+  
   @Input() messages = [];
   @Input() notifications = [];
-
+  user: any = {};
   sideMenuVisible = true;
   baseUrl = '';
 
-  constructor(public afAuth: AngularFireAuth,
+  constructor(
+    public userdetailservice: UserdetailService,
+    public afAuth: AngularFireAuth,
+    public authService: AuthService,
     public router: Router,
     private sideMenuService: SideMenuService,
     private responsiveService: ResponsiveBreakpointsService,
@@ -67,9 +73,19 @@ export class TopNavbarContentComponent {
   }
 
   onLogout(){
-    this.afAuth.auth.signOut().then(() => {
-      console.log('Usuario deslogeado correctamente');
-      this.router.navigate(['/login']);
-   }).catch(error => console.log(error));
+      this.authService.logoutUser()
+      .then(() => {
+          console.log('Usuario deslogeado correctamente');
+          this.router.navigate(['/login']);
+    }).catch(error => console.log(error));
+  }
+
+  ngOnInit(): void {
+    let user = this.afAuth.auth.currentUser;
+    let userId = user.uid;
+    this.userdetailservice.getUserDetail(userId).subscribe(user => {
+      this.user = user;
+    });
+    
   }
 }

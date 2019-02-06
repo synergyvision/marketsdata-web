@@ -2,20 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { UserDetail } from'../models/userDetail';
 import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
+import { UserdetailService } from '../services/userdetail.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./styles/login.component.scss']
 })
-
 export class LoginComponent implements OnInit {
     
-    public userList: AngularFireList<any>;
     public formLogin: FormGroup;
     public userSignUp: any = {};
     public usersCollection: AngularFirestoreCollection<UserDetail>;
@@ -39,13 +38,13 @@ export class LoginComponent implements OnInit {
     };
 
     constructor(
+      public userDetailService: UserdetailService,
       public afAuth: AngularFireAuth,
-      public firebase: AngularFireDatabase,
-      private afs: AngularFirestore,
+      public afs: AngularFirestore,
       public formBuilder: FormBuilder,
+      private authService: AuthService,
       public router: Router
       ) {
-        this.userList = this.firebase.list('userDetails');
         this.formLogin = formBuilder.group({
           email: new FormControl('', Validators.compose([
             Validators.email,
@@ -60,21 +59,20 @@ export class LoginComponent implements OnInit {
     ngOnInit() {}
 
     createUser(){
-      
-      return this.afAuth.auth.createUserWithEmailAndPassword( this.userSignUp.email, this.userSignUp.password )
-      .then((userSignUp) => {
-            var user = this.afAuth.auth.currentUser;
-            var userId = user.uid;
-            this.usersCollection.doc(userId).set(this.user);
+      this.authService.registerUser( this.userSignUp.email, this.userSignUp.password )
+      .then(() => {
+            
+            this.userDetailService.insertUserDetails(this.user);
+            this.router.navigate(['/']);
       })
       .catch(error => console.log(error));
     }
 
     loginUser(){
-      return this.afAuth.auth.signInWithEmailAndPassword(this.formLogin.get('email').value, this.formLogin.get('password').value)
-      .then((userLogin) => {
-        this.router.navigate(['/']);
-      })
-      .catch(error => console.log(error));
+        this.authService.loginUser(this.formLogin.get('email').value, this.formLogin.get('password').value)
+        .then(() => {
+            this.router.navigate(['/']);
+        })
+        .catch(error => console.log(error));
     }
 }
