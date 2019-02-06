@@ -31,10 +31,9 @@ export class ChangePasswordComponent implements OnInit{
     onRestablecer(){
         this.afAuth.auth.verifyPasswordResetCode(this.actionCode)
         .then(() => {
-            
             this.afAuth.auth.confirmPasswordReset(this.actionCode, this.user.newpassword)
             .then(() => {
-                this.router.navigate(['/dashboard']);
+                this.router.navigate(['/login']);
             }).catch(error => console.log(error));
 
         }).catch(error => console.log(error));

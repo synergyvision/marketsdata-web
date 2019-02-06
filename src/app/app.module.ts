@@ -21,6 +21,8 @@ import { LoginComponent } from './login/login.component';
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 import { AuthGuard } from './auth/auth.guard';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     BrowserModule.withServerTransition({appId: 'my-app'}),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, 
-    AngularFireAuthModule, 
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
     AngularFireStorageModule,
     HttpClientModule,
     RouterModule.forRoot(rootRoutes, {

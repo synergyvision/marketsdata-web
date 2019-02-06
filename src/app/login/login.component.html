@@ -5,17 +5,24 @@
         <h2 class="main-title">Login Form</h2>
       </div>
     </header>
-    <form name="form" class="form-horizontal form-stacked" #formLogin ="ngForm" (ngSubmit) = "loginUser()" novalidate>
-      <div class="form-group">
+    <form name="form" class="form-horizontal form-stacked" [formGroup]="formLogin" (ngSubmit) = "loginUser()">
+      <div class="form-group"  [ngClass]="{ 'has-error': ((formLogin.get('email').invalid) && (formLogin.get('email').touched)) }">
         <label class="form-label col-xs-12" for="email">EMAIL ADDRESS<em>*</em></label>
         <div class="col-xs-12">
-          <input type="email" class="form-control" #email ="ngModel" [(ngModel)]="userLogin.email" placeholder="Email" name="email" required>
+          <input type="email" class="form-control" formControlName="email" placeholder="Email" name="email">
+        </div>
+        <div class="validation-errors col-sm-10">
+          <ng-container *ngFor="let validation of validationMessages.email">
+            <div class="help-block" *ngIf="formLogin.get('email').hasError(validation.type) && (formLogin.get('email').dirty || formLogin.get('email').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
         </div>
       </div>
       <div class="form-group">
         <label class="form-label col-xs-12">PASSWORD<em>*</em></label>
         <div class="col-xs-12">
-          <input type="password" class="form-control" #password="ngModel" [(ngModel)]="userLogin.password" placeholder="Password" name="password" required>
+          <input type="password" class="form-control" formControlName="password"  placeholder="Password" name="password">
         </div>
       </div>
       <div class="form-group">
@@ -47,6 +54,30 @@
       </div>
     </header>
     <form class="form-horizontal form-stacked" #formRegister="ngForm" (ngSubmit) = "createUser()">
+        <div class="form-group">
+            <label class="form-label col-xs-12">NOMBRE<em>*</em></label>
+            <div class="col-xs-12">
+              <input type="text" class="form-control" #nombre="ngModel" [(ngModel)]="user.name" placeholder="Nombre"  name="nombre">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label col-xs-12">APELLIDO<em>*</em></label>
+            <div class="col-xs-12">
+              <input type="text" class="form-control" #apellido="ngModel" [(ngModel)]="user.lastName" placeholder="Apellido"  name="apellido">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label col-xs-12">EDAD<em>*</em></label>
+            <div class="col-xs-12">
+              <input type="text" class="form-control" #edad="ngModel" [(ngModel)]="user.age" placeholder="Edad"  name="edad">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label col-xs-12">TRABAJO<em>*</em></label>
+            <div class="col-xs-12">
+              <input type="text" class="form-control" #trabajo="ngModel" [(ngModel)]="user.job" placeholder="Trabajo"  name="trabajo">
+            </div>
+        </div>
       <div class="form-group">
         <label class="form-label col-xs-12">EMAIL ADDRESS<em>*</em></label>
         <div class="col-xs-12">
