@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation, Inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { APP_BASE_HREF, isPlatformBrowser } from '@angular/common';
-import { UserdetailService } from '../services/userdetail.service';
 
 
 @Component({
@@ -18,7 +17,7 @@ import { UserdetailService } from '../services/userdetail.service';
 })
 
 export class DashboardPageComponent implements OnInit {
-  user: any = {};
+  
   charts: any = {};
   orders = [
     { title: 'Completed Orders', day: 35, week: 120, month: 499 },
@@ -34,6 +33,7 @@ export class DashboardPageComponent implements OnInit {
   isBrowser: boolean;
 
   constructor(
+    
     route: ActivatedRoute,
     @Inject(APP_BASE_HREF) private baseHref: string,
     @Inject(PLATFORM_ID) private platformId: Object
@@ -49,5 +49,8 @@ export class DashboardPageComponent implements OnInit {
     this.tableDataSource = route.snapshot.data['table'].data;
   }
 
-  ngOnInit(): void { }
+
+
+  ngOnInit(): void { 
+  }
 }

@@ -75,7 +75,6 @@ export class TopNavbarContentComponent  implements OnInit {
   onLogout(){
       this.authService.logoutUser()
       .then(() => {
-          console.log('Usuario deslogeado correctamente');
           this.router.navigate(['/login']);
     }).catch(error => console.log(error));
   }

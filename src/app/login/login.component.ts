@@ -7,6 +7,8 @@ import { UserDetail } from'../models/userDetail';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { UserdetailService } from '../services/userdetail.service';
+import { Indicator } from '../models/indicator';
+import { IndicatorsService } from '../services/indicators.service';
 
 @Component({
   selector: 'app-login',
@@ -21,11 +23,21 @@ export class LoginComponent implements OnInit {
     public users: Observable<UserDetail[]>;
     
     user: UserDetail ={
+        id: '',
         name: '',
         lastName: '',
         age: '',
         job: ''
     };
+
+    indicator: Indicator ={
+      id: '',
+      indicator1: {name: 'Indicador 1', enable: true},
+      indicator2: {name: 'Indicador 2', enable: true},
+      indicator3: {name: 'Indicador 3', enable: true},
+      indicator4: {name: 'Indicador 4', enable: true},
+      indicator5: {name: 'Indicador 5', enable: true},
+    }
 
     validationMessages = {
       email: [
@@ -38,6 +50,7 @@ export class LoginComponent implements OnInit {
     };
 
     constructor(
+      public indicatorService: IndicatorsService,
       public userDetailService: UserdetailService,
       public afAuth: AngularFireAuth,
       public afs: AngularFirestore,
@@ -61,8 +74,8 @@ export class LoginComponent implements OnInit {
     createUser(){
       this.authService.registerUser( this.userSignUp.email, this.userSignUp.password )
       .then(() => {
-            
             this.userDetailService.insertUserDetails(this.user);
+            this.indicatorService.insertUserIndicators(this.indicator);
             this.router.navigate(['/']);
       })
       .catch(error => console.log(error));
