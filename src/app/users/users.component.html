@@ -1,0 +1,24 @@
+<div *ngIf="users && users.length >0">
+    <div *ngFor="let user of users">
+        <p> {{ user.name }} </p>
+        <p> {{ user.lastName }} </p>
+        <p> {{ user.age }} </p>
+        <p> {{ user.job }} </p>
+        
+        
+        <div *ngIf="user.indicators && user.indicators.length >0">
+            <div *ngFor="let indicator of user.indicators">
+                <label>{{indicator.name}}</label>
+                <mat-slide-toggle disableRipple class="mat-override" [checked]="indicator.enable">
+                    <span class="mat-slide-toggle-label-on"><i class="fa fa-check"></i></span>
+                    <span class="mat-slide-toggle-label-off"><i class="fa fa-times"></i></span>
+                </mat-slide-toggle>
+            </div>
+        </div>
+        
+        <button>Enviar</button>
+        <hr>
+    </div>
+   
+    
+</div>

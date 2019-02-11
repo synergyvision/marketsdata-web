@@ -15,6 +15,7 @@ export const rootRoutes: Routes = [
         { path: 'utils', loadChildren: '../utils/utils.module#UtilsModule' },
         { path: 'layouts', loadChildren: '../layouts/layouts.module#LayoutsModule' },
         { path: 'blank-page', loadChildren: '../blank-page/blank-page.module#BlankPageModule' },
+        { path: 'users', loadChildren: '../users/users.module#UsersModule' },
       ]},
       {
         path: '404',

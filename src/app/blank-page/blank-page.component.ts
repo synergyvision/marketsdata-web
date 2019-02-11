@@ -2,6 +2,7 @@ import { Component,  OnInit } from '@angular/core';
 import { IndicatorsService } from '../services/indicators.service';
 import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-blank-page',
@@ -11,23 +12,24 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class BlankPageComponent implements OnInit {
     indicator: any = {};
     form: FormGroup;
-    prueba = [];
-    orders = [];
-  
+    
+    orders = [{ enable: false, name: '' },
+              { enable: false, name: '' },
+              { enable: false, name: '' },
+              { enable: false, name: '' },
+              { enable: false, name: '' }];
+
     constructor(private formBuilder: FormBuilder,
         public indicatorService: IndicatorsService,
-        public afAuth: AngularFireAuth
+        public afAuth: AngularFireAuth,
+        private route: ActivatedRoute
         ) {
-        this.orders.push({ id: 100, name: 'order 1' });
-        this.orders.push({ id: 200, name: 'order 2' });
-        this.orders.push({ id: 300, name: 'order 3' });
-        this.orders.push({ id: 400, name: 'order 4' });
-      const controls = this.orders.map(c => new FormControl(false));
-      controls[0].setValue(true);
-  
-      this.form = this.formBuilder.group({
-        orders: new FormArray(controls, minSelectedCheckboxes(1))
-      });
+            const controls = this.orders.map(c => new FormControl(false));
+                controls[0].setValue(true);
+                this.form = this.formBuilder.group({
+                    orders: new FormArray(controls, minSelectedCheckboxes(1))
+                });
+            
     }
   
     submit() {
@@ -39,24 +41,26 @@ export class BlankPageComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        let user = this.afAuth.auth.currentUser;
-        let userId = user.uid;
-        this.indicatorService.getUserIndicator(userId).subscribe(indicator =>{
-            this.indicator = indicator;
-            this.getParamsIndicators();
-        });
+            let user = this.afAuth.auth.currentUser;
+            let userId = user.uid;
+            this.indicatorService.getUserIndicator(userId).subscribe(indicator =>{
+                this.indicator = indicator;
+                this.getParamsIndicators();
+                const controls = this.orders.map(c => new FormControl(false));
+                controls[0].setValue(true);
+                this.form = this.formBuilder.group({
+                    orders: new FormArray(controls, minSelectedCheckboxes(1))
+                });
+            });
     }
 
     getParamsIndicators(){
+        this.orders = [];
         for (const param in this.indicator) {
            if(param != 'id'){
-
             this.orders.push({name: getProp(this.indicator,param+'.'+'name'), enable: getProp(this.indicator,param+'.'+'enable')});
            }
         }
-        console.log(this.orders);
-        
-        
     }
 }
 

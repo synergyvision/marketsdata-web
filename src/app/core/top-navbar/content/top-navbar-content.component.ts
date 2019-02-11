@@ -85,6 +85,5 @@ export class TopNavbarContentComponent  implements OnInit {
     this.userdetailservice.getUserDetail(userId).subscribe(user => {
       this.user = user;
     });
-    
   }
 }

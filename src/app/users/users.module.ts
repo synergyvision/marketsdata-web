@@ -1,27 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { BlankPageComponent } from './blank-page.component';
+import { UsersComponent } from './users.component';
 import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
-
-export const BlankPageRoutes = [
-  { path: '', component: BlankPageComponent }
+export const UsersRoutes = [
+  { path: '', component: UsersComponent }
 ];
 
 @NgModule({
   declarations: [
-    BlankPageComponent
+    UsersComponent
   ],
   imports: [
-    RouterModule.forChild(BlankPageRoutes),
+    RouterModule.forChild(UsersRoutes),
     CommonModule,
     MatCheckboxModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSlideToggleModule
   ],
-  providers: [BlankPageComponent]
+  providers: [UsersComponent]
 })
-export class BlankPageModule { }
+export class UsersModule { }
