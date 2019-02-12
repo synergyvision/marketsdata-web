@@ -1,4 +1,4 @@
-<div *ngIf="users && users.length >0">
+<!-- <div *ngIf="users && users.length >0">
     <div *ngFor="let user of users">
         <p> {{ user.name }} </p>
         <p> {{ user.lastName }} </p>
@@ -19,6 +19,22 @@
         <button>Enviar</button>
         <hr>
     </div>
-   
-    
+</div> -->
+
+<div *ngIf="users">
+        <p> {{ users.name }} </p>
+        <p> {{ users.lastName }} </p>
+        <p> {{ users.age }} </p>
+        <p> {{ users.job }} </p>
+         
+        <form [formGroup]="form" (ngSubmit)="onSubmit(users.id)">
+                <label formArrayName="orders" *ngFor="let order of form.controls.orders.controls; let i = index">
+                    {{orders[i].name}}
+                    <mat-slide-toggle disableRipple class="mat-override" [formControlName]="i">
+                        <span class="mat-slide-toggle-label-on"><i class="fa fa-check"></i></span>
+                        <span class="mat-slide-toggle-label-off"><i class="fa fa-times"></i></span>
+                    </mat-slide-toggle>
+                </label>
+            <button>submit</button>
+        </form>
 </div>

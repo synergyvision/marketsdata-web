@@ -52,4 +52,11 @@ export class IndicatorsService {
       let userId = currentUser.uid;
       this.indicatorsCollection.doc(userId).set(indicator);
     }
+
+    updatetUserIndicators(indicator: Indicator){
+      let idIndicator = indicator.id;
+      indicator.id = '';
+      this.indicatorDoc = this.afs.doc<Indicator>(`indicators/${idIndicator}`);
+      this.indicatorDoc.update(indicator);
+    }
 }

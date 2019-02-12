@@ -1,23 +1,4 @@
 <h2>Escoge un indicador</h2>
-<!-- <form>
-        <div class="form-group" *ngIf="indicator?.indicator1?.enable">
-                <mat-checkbox disableRipple >{{ indicator?.indicator1?.name }}</mat-checkbox>
-        </div>
-        <div class="form-group" *ngIf="indicator?.indicator2?.enable">
-                <mat-checkbox disableRipple >{{ indicator?.indicator2?.name }}</mat-checkbox>
-        </div>
-        <div class="form-group" *ngIf="indicator?.indicator3?.enable">
-                <mat-checkbox disableRipple >{{ indicator?.indicator3?.name }}</mat-checkbox>
-        </div>
-        <div class="form-group" *ngIf="indicator?.indicator4?.enable">
-                <mat-checkbox disableRipple >{{ indicator?.indicator4?.name }}</mat-checkbox>
-        </div>
-        <div class="form-group" *ngIf="indicator?.indicator5?.enable">
-                <mat-checkbox disableRipple >{{ indicator?.indicator5?.name }}</mat-checkbox>
-        </div>
-</form> -->
-
-
 <form [formGroup]="form" (ngSubmit)="submit()">
 <label formArrayName="orders" *ngFor="let order of form.controls.orders.controls; let i = index">
          <mat-checkbox *ngIf="orders[i].enable" [formControlName]="i" disableRipple >{{orders[i].name}}</mat-checkbox>

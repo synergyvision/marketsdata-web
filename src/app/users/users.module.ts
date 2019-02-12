@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
+
 export const UsersRoutes = [
   { path: '', component: UsersComponent }
 ];
