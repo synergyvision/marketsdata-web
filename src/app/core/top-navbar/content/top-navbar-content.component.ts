@@ -80,10 +80,11 @@ export class TopNavbarContentComponent  implements OnInit {
   }
 
   ngOnInit(): void {
-    let user = this.afAuth.auth.currentUser;
-    let userId = user.uid;
-    this.userdetailservice.getUserDetail(userId).subscribe(user => {
-      this.user = user;
-    });
+      let user = this.afAuth.auth.currentUser;
+      let userId = user.uid;
+      let userdetail = this.userdetailservice.getUserDetailWithoutId(userId);
+      userdetail.get().subscribe((user)=>{
+        this.user = user.data();
+      });
   }
 }

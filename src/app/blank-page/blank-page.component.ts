@@ -29,8 +29,7 @@ export class BlankPageComponent implements OnInit {
                 this.form = this.formBuilder.group({
                     orders: new FormArray(controls, minSelectedCheckboxes(1))
                 });
-            
-    }
+         }
   
     submit() {
       const selectedOrderIds = this.form.value.orders

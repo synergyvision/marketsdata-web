@@ -11,9 +11,11 @@ import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms';
 })
 export class UsersComponent implements OnInit {
     selectedUserIndicator: any = {};
-    users: any = {};
+    users: any = [];
     indicator: any = {};
+    formA: FormGroup[] = [];
     form: FormGroup;
+    formB: FormGroup;
 
     orders = [{ enable: false, name: '' },
     { enable: false, name: '' },
@@ -27,66 +29,74 @@ export class UsersComponent implements OnInit {
         private formBuilder: FormBuilder
        
         ){
+            
             const controls = this.orders.map(c => new FormControl(false));
-                this.form = this.formBuilder.group({
-                    orders: new FormArray(controls)
+            this.form = this.formBuilder.group({
+                orders: new FormArray(controls)
             });
+
+            
+            this.formB = this.formBuilder.group({
+                orders: new FormArray(controls)
+            });
+
+            for (let i = 0; i < 20; i++){
+                this.formA.push(this.form);
+            }
+
+           
         }
    
-    ngOnInit(){
-        /*
-        this.userdetailservice.getUsersDetails().subscribe(user => {
-            this.users = user;
-            this.users.forEach( (valor) =>{ 
-            this.indicatorService.getUserIndicator(valor.id).subscribe(indicator => {
-                this.indicator = indicator;
-                this.getParamsIndicators();
-                valor.indicators = this.orders;
-            });
-        });
-        console.log(this.users);
-    });*/   
-            var usuario = this.afAuth.auth.currentUser;
-            var userId = usuario.uid;
-            this.userdetailservice.getUserDetail(userId).subscribe(user => {
+        ngOnInit() {
+           
+            this.userdetailservice.getUsersDetails().subscribe(user => {
+               
                 this.users = user;
-                this.indicatorService.getUserIndicator(userId).subscribe(indicator => {
-                    this.indicator = indicator;
-                   
-                    
-                    this.getParamsIndicators();
-                    this.users.indicators = this.orders;
-
-                    const controls = this.orders.map(c => new FormControl(c.enable));
-                    this.form = this.formBuilder.group({
-                    orders: new FormArray(controls)
+                    var i = 0;
+    
+                    this.users.forEach((valor) =>{ 
+                    this.indicatorService.getUserIndicator(valor.id).subscribe(indicator => {
+                        this.indicator = indicator;
+                        this.getParamsIndicators();
+                        valor.indicators = this.orders;
+                       
+                        
+                        const controls = this.orders.map(c => new FormControl(c.enable));
+                            this.form = this.formBuilder.group({
+                            orders: new FormArray(controls)
+                        });
+                        this.formA[i] = this.form;
+                        i++;
+                    });
                 });
-            });   
+            
         });
     }
+
+  
 
     getParamsIndicators(){
         this.orders = [];
         for (const param in this.indicator) {
            if(param != 'id'){
-            this.orders.push({name: getProp(this.indicator,param+'.'+'name'), enable: getProp(this.indicator,param+'.'+'enable')});
+            this.orders.push({name: getProp(this.indicator,param+'.'+'name'), 
+            enable: getProp(this.indicator,param+'.'+'enable')});
            }
         }
     }
 
-    onSubmit(userId){
+    onSubmit(userId, formA: FormGroup){
         let i = 0;
         this.indicatorService.getUserIndicator(userId).subscribe(indicator => {
             this.selectedUserIndicator = indicator;
             for(const param in this.selectedUserIndicator){
                 if(param != 'id'){
-                    this.selectedUserIndicator[param].enable = this.form.value.orders[i];
+                    this.selectedUserIndicator[param].enable = formA.value.orders[i];
                     i++;
                 }
             }
            if(!(typeof (this.selectedUserIndicator.indicator1.enable) == "undefined"))
                 this.indicatorService.updatetUserIndicators(this.selectedUserIndicator);
-            
         });   
     }
 }

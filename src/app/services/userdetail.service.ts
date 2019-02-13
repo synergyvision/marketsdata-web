@@ -34,6 +34,11 @@ export class UserdetailService {
          }));
     }
 
+    getUserDetailWithoutId(idUser: string){
+        this.userDoc = this.afs.doc<UserDetail>(`userdetails/${idUser}`);
+        return this.userDoc;
+    }
+
     getUserDetail(idUser: string){
       this.userDoc = this.afs.doc<UserDetail>(`userdetails/${idUser}`);
       return this.user = this.userDoc.snapshotChanges().pipe(map(action => {
