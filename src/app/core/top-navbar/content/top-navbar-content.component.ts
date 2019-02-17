@@ -1,12 +1,13 @@
-import { Component, Input, ViewEncapsulation, Inject, OnInit } from '@angular/core';
+import { Component, Input, ViewEncapsulation, Inject, OnInit, OnDestroy } from '@angular/core';
 import { SideMenuService } from '../../side-menu/side-menu.service';
 import { ResponsiveBreakpointsService } from '../../responsive-breakpoints/responsive-breakpoints.service';
 import { APP_BASE_HREF } from '@angular/common';
-import { filter } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { UserdetailService } from '../../../services/userdetail.service';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-top-navbar-content',
@@ -14,14 +15,16 @@ import { AngularFireAuth } from '@angular/fire/auth';
   templateUrl: './top-navbar-content.component.html',
   encapsulation: ViewEncapsulation.None
 })
-export class TopNavbarContentComponent  implements OnInit {
+export class TopNavbarContentComponent  implements OnInit, OnDestroy {
+ 
   
   @Input() messages = [];
   @Input() notifications = [];
   user: any = {};
   sideMenuVisible = true;
   baseUrl = '';
-
+  private ngUnsubscribe = new Subject();
+  
   constructor(
     public userdetailservice: UserdetailService,
     public afAuth: AngularFireAuth,
@@ -83,8 +86,14 @@ export class TopNavbarContentComponent  implements OnInit {
       let user = this.afAuth.auth.currentUser;
       let userId = user.uid;
       let userdetail = this.userdetailservice.getUserDetailWithoutId(userId);
-      userdetail.get().subscribe((user)=>{
+      userdetail.get().pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(user =>{
         this.user = user.data();
       });
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

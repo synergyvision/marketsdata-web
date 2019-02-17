@@ -26,7 +26,7 @@ export class UserdetailService {
     getUsersDetails(){
          return this.users = this.usersCollection.snapshotChanges()
          .pipe(map(changes =>{
-           return changes.map(action=> {
+           return changes.map(action => {
              const data = action.payload.doc.data() as UserDetail;
              data.id = action.payload.doc.id;
              return data;

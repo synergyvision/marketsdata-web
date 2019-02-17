@@ -6,10 +6,15 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-
+import {  UsersResolver } from './users.resolve';
+import { TableDataService } from '../tables/services/table-data.service';
+import { MatTableModule } from '@angular/material/table';
+import { UserdetailService } from '../services/userdetail.service';
 
 export const UsersRoutes = [
-  { path: '', component: UsersComponent }
+  { path: '', component: UsersComponent,
+   resolve: { userData: UsersResolver
+  } }
 ];
 
 @NgModule({
@@ -22,8 +27,13 @@ export const UsersRoutes = [
     MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatTableModule
   ],
-  providers: [UsersComponent]
+  providers: [UsersComponent,
+              TableDataService,
+              UsersResolver,
+              UserdetailService
+  ]
 })
 export class UsersModule { }

@@ -1,17 +1,21 @@
-import { Component,  OnInit } from '@angular/core';
+import { Component,  OnInit, OnDestroy } from '@angular/core';
 import { IndicatorsService } from '../services/indicators.service';
 import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-blank-page',
   templateUrl: './blank-page.component.html',
   styleUrls: ['./styles/blank-page.component.scss']
 })
-export class BlankPageComponent implements OnInit {
+export class BlankPageComponent implements OnInit, OnDestroy {
+  
     indicator: any = {};
     form: FormGroup;
+    private ngUnsubscribe = new Subject();
     
     orders = [{ enable: false, name: '' },
               { enable: false, name: '' },
@@ -42,7 +46,8 @@ export class BlankPageComponent implements OnInit {
     ngOnInit(): void {
             let user = this.afAuth.auth.currentUser;
             let userId = user.uid;
-            this.indicatorService.getUserIndicator(userId).subscribe(indicator =>{
+            this.indicatorService.getUserIndicator(userId).pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe(indicator =>{
                 this.indicator = indicator;
                 this.getParamsIndicators();
                 const controls = this.orders.map(c => new FormControl(false));
@@ -60,6 +65,11 @@ export class BlankPageComponent implements OnInit {
             this.orders.push({name: getProp(this.indicator,param+'.'+'name'), enable: getProp(this.indicator,param+'.'+'enable')});
            }
         }
+    }
+
+    ngOnDestroy(): void {
+      this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
     }
 }
 

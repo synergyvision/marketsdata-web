@@ -5,7 +5,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 @Component({
   selector: 'app-recover-password',
   templateUrl: './recover-password.component.html',
-  styles: ['./styles/recover-password.component.sccs']
+  styleUrls: ['./styles/recover-password.component.scss']
 })
 export class RecoverPasswordComponent implements OnInit {
 
@@ -25,7 +25,7 @@ export class RecoverPasswordComponent implements OnInit {
   onRecuperar(){
     this.afAuth.auth.sendPasswordResetEmail(this.user.email)
     .then(() => {
-      console.log("Correo enviado al usuario");
+      
     })
     .catch(error => console.log(error));
   }
