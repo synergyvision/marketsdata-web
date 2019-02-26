@@ -14,7 +14,14 @@ export class UserdetailService {
   public users: Observable<UserDetail[]>;
   public userDoc: AngularFirestoreDocument<UserDetail>;
   public user: Observable<UserDetail>;
-  
+  public selectedUser: UserDetail = {
+      id: '',
+      name: '',
+      lastName: '',
+      age: '',
+      job: ''
+  };
+
     constructor( 
         private afs: AngularFirestore,
         private afAuth: AngularFireAuth

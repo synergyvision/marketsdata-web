@@ -28,7 +28,7 @@ export const UsersRoutes = [
     FormsModule,
     ReactiveFormsModule,
     MatSlideToggleModule,
-    MatTableModule
+    MatTableModule,
   ],
   providers: [UsersComponent,
               TableDataService,

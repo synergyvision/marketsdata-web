@@ -11,8 +11,6 @@ import { ModalsPageComponent } from './pages/modals/modals.component';
 import { NotificationsPageComponent } from './pages/notifications/notifications.page.component';
 
 import { LoginModalComponent } from './pages/modals/templates/login/login.component';
-import { RegisterModalComponent } from './pages/modals/templates/register/register.component';
-
 export const utilsRoutes = [
   {
     path: '',
@@ -47,15 +45,13 @@ export const utilsRoutes = [
     ModalsPageComponent,
     NotificationsPageComponent,
     LoginModalComponent,
-    RegisterModalComponent,
     AlertsPageComponent
   ],
   providers: [
     AutoCompleterService,
   ],
   entryComponents: [
-    LoginModalComponent,
-    RegisterModalComponent
+    LoginModalComponent
   ],
   imports: [
     RouterModule.forChild(utilsRoutes),

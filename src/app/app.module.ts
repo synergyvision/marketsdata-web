@@ -22,6 +22,7 @@ import { RecoverPasswordComponent } from './recover-password/recover-password.co
 import { AuthGuard } from './auth/auth.guard';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { RegisterModalComponent } from './utils/pages/modals/templates/register/register.component';
 
 
 @NgModule({
@@ -29,8 +30,10 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     AppComponent,
     LoginComponent,
     RecoverPasswordComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    RegisterModalComponent
   ],
+  entryComponents: [RegisterModalComponent],
   imports: [
     BrowserModule.withServerTransition({appId: 'my-app'}),
     AngularFireModule.initializeApp(environment.firebase),

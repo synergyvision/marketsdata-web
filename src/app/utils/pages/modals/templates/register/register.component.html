@@ -1,28 +1,37 @@
 <div class="modal-register">
   <div class="modal-register-form">
-    <div class="brand-logo">
-      <app-preload-image [ratio]="{w:1, h:1}" src='../../../../../../assets/imgs/angular.svg' alt="Angular"></app-preload-image>
-    </div>
-    <h2 class="modal-title">SIGN UP</h2>
+    <h2 class="modal-title">Editar Usuario</h2>
     <form class="form-horizontal">
-      <input type="text" class="form-control" placeholder="USER NAME">
-      <input type="text" class="form-control" placeholder="EMAIL">
-      <input type="password" class="form-control" placeholder="PASSWORD">
-      <mat-checkbox disableRipple>Subscribe to newsletter</mat-checkbox>
-      <span class="tos">
-        By creating an account, I agree to the site Terms of Service and Privacy Policy.
-      </span>
-      <input type="button" class="form-control btn btn-register" value="SIGN UP">
-      <div class="login-section">
-        <span class="text">Already have an account?</span>
-        <input type="submit" class="form-control btn btn-signin" value="LOG IN">
+      <div class="user-data-section">
+        <span class="text">Nombre</span>
+        <span id="name" class="form-control">{{user.name}} {{user.lastName}}</span>
+      </div>
+      <div class="user-data-section">
+        <span class="text">Trabajo</span>
+        <span id="name" class="form-control">{{user.job}}</span>
+      </div>
+      <div class="user-data-section">
+        <span class="text">Edad</span>
+        <span id="name" class="form-control">{{user.age}}</span>
       </div>
     </form>
     <div class="register-divider">
-      <hr class="line"><span>OR</span><hr class="line">
+      <hr class="line"><h4>Indicadores</h4>
+      <hr class="line">
     </div>
-    <button type="button" class="fb-signin">
-      SIGN UP WITH FACEBOOK
-    </button>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(user.id,form)" class="row">
+      <label formArrayName="orders" *ngFor="let order of form.controls.orders.controls; let i = index" class="col-md-6">
+        <div class="pull-left">{{orders[i].name}}</div>
+        <div class="pull-right"><mat-slide-toggle disableRipple class="mat-override" [formControlName]="i">
+            <span class="mat-slide-toggle-label-on"><i class="fa fa-check"></i></span>
+            <span class="mat-slide-toggle-label-off"><i class="fa fa-times"></i></span>
+          </mat-slide-toggle></div>
+      </label>
+      <hr>
+      <div class="col-md-12 ">
+          <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+      
+    </form>
   </div>
 </div>

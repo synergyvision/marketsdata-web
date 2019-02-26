@@ -23,6 +23,8 @@
   }
 
   .form-control {
+    border-width: 0px !important;
+    text-align: left;
     &[type='text'] {
       margin-bottom: 20px;
     }
@@ -58,7 +60,10 @@
     text-align: left;
   }
 
-  .login-section {
+  .margin-right5{
+    margin-right: 10px;
+  }
+  .user-data-section {
     align-items: center;
     display: flex;
     justify-content: space-between;
@@ -84,7 +89,7 @@
     }
   }
 
-  .register-divider {
+  .divider {
     align-items: center;
     color: $grey8;
     display: flex;
