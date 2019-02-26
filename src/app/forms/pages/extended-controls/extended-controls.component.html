@@ -194,7 +194,7 @@
     <div class="card">
       <form class="form-horizontal form-stacked" [formGroup]="formElements">
         <div class="form-group">
-          <div class="col-sm-6">
+          <!-- <div class="col-sm-6">
             <header class="form-group title">
               <div class="col-xs-12 text-center">
                 <h2 class="main-title">Tags</h2>
@@ -245,32 +245,19 @@
                 </mat-form-field>
               </div>
             </div>
-          </div>
-          <div class="col-sm-6">
+          </div> -->
+          <div class="col-sm-8">
             <header class="form-group title">
               <div class="col-xs-12 text-center">
                 <h2 class="main-title">Selects</h2>
                 <hr class="line">
               </div>
             </header>
-            <div class="form-group">
-              <label class="form-label col-xs-6">Single:</label>
-              <label class="form-label col-xs-6">Multiple:</label>
-              <div class="col-xs-6">
-                <mat-button-toggle-group name="singleSelect" vertical="true">
-                  <mat-button-toggle checked="true">Single select</mat-button-toggle>
-                  <mat-button-toggle checked="false">Single select</mat-button-toggle>
-                  <mat-button-toggle checked="false">Single select</mat-button-toggle>
-                </mat-button-toggle-group>
-              </div>
-              <div class="col-xs-6">
-                <mat-button-toggle-group name="multipleSelect" vertical="true" multiple>
-                  <mat-button-toggle>Multiple select</mat-button-toggle>
-                  <mat-button-toggle>Multiple select</mat-button-toggle>
+                <mat-button-toggle-group name="multipleSelect" multiple>
+                  <mat-button-toggle>Multiple select</mat-button-toggle>&nbsp;
+                  <mat-button-toggle>Multiple select</mat-button-toggle>&nbsp;
                   <mat-button-toggle>Multiple select</mat-button-toggle>
                 </mat-button-toggle-group>
-              </div>
-            </div>
           </div>
         </div>
         <header class="form-group title">

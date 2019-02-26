@@ -1,4 +1,4 @@
-import { Component,  OnInit, OnDestroy } from '@angular/core';
+import { Component,  OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { IndicatorsService } from '../services/indicators.service';
 import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CompanyService } from '../services/company.service';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { Company } from '../models/company';
 
 @Component({
   selector: 'app-blank-page',
@@ -14,10 +16,11 @@ import { CompanyService } from '../services/company.service';
 })
 export class BlankPageComponent implements OnInit, OnDestroy {
     displayedColumns: string[] = ['name', 'marketcap'];
-    dataSource = undefined;
+    
     indicator: any = {};
     form: FormGroup;
-   
+    dataSource1 : MatTableDataSource<Company>;
+    @ViewChild('paginator') paginator: MatPaginator;
     private ngUnsubscribe = new Subject();
     
     orders = [{ enable: false, name: '' },
@@ -32,9 +35,9 @@ export class BlankPageComponent implements OnInit, OnDestroy {
         public afAuth: AngularFireAuth,
         private route: ActivatedRoute
         ) {
-          this.dataSource = route.snapshot.data['comapaniesData'].data;
+          this.dataSource1 = new MatTableDataSource(route.snapshot.data['comapaniesData'].data);
+         
             const controls = this.orders.map(c => new FormControl(false));
-                controls[0].setValue(true);
                 this.form = this.formBuilder.group({
                     orders: new FormArray(controls, minSelectedCheckboxes(1))
                 });
@@ -56,14 +59,15 @@ export class BlankPageComponent implements OnInit, OnDestroy {
                 this.indicator = indicator;
                 this.getParamsIndicators();
                 const controls = this.orders.map(c => new FormControl(false));
-                controls[0].setValue(true);
+               
                 this.form = this.formBuilder.group({
                     orders: new FormArray(controls, minSelectedCheckboxes(1))
                 });
             });
+            this.dataSource1.paginator = this.paginator;
     }
 
-    getParamsIndicators(){
+    getParamsIndicators() {
         this.orders = [];
         for (const param in this.indicator) {
            if(param != 'id'){

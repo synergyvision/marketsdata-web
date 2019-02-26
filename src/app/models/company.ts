@@ -8,5 +8,6 @@ export interface Company {
     peRatio: number,
     earningYield: number,
     returnOnAssets: number,
-    returnOnEquity: number
+    returnOnEquity: number,
+    ttmEps: number
 }

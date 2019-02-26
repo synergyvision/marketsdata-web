@@ -10,6 +10,7 @@ import { BlankPageResolver } from './blank-page.resolver';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CompanyService } from '../services/company.service'
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 export const BlankPageRoutes = [
   { path: '', component: BlankPageComponent, resolve: {
@@ -29,7 +30,8 @@ export const BlankPageRoutes = [
     ReactiveFormsModule,
     MatSlideToggleModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatButtonToggleModule
   ],
   providers: [BlankPageComponent, BlankPageResolver, CompanyService]
 })
