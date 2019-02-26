@@ -20,13 +20,12 @@ export class CompanyService {
       }
 
     getCompanies(){
-         return this.companies;
-        //  = this.companiesCollection.snapshotChanges()
-        //  .pipe(map(changes =>{
-        //    return changes.map(action => {
-        //      const data = action.payload.doc.data() as Company;
-        //      return data;
-        //    });
-        //  }));
+         return this.companies = this.companiesCollection.snapshotChanges()
+         .pipe(map(changes =>{
+           return changes.map(action => {
+             const data = action.payload.doc.data() as Company;
+             return data;
+           });
+         }));
     }
 }
