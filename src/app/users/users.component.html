@@ -2,7 +2,6 @@
   <div class="row">
     <div class="col-xs-12">
       <div class="card">
-
         <header class="row title">
           <div class="col-xs-12">
             <h2 class="main-title">Usuarios</h2>
@@ -32,11 +31,6 @@
                 <th mat-header-cell *matHeaderCellDef> Trabajo </th>
                 <td mat-cell *matCellDef="let element"> {{element.job}} </td>
               </ng-container>
-              <ng-container matColumnDef="indicators">
-                <th mat-header-cell *matHeaderCellDef> Indicadores </th>
-                <td mat-cell *matCellDef="let element">
-                </td>
-              </ng-container>
               <ng-container matColumnDef="options">
                 <th mat-header-cell *matHeaderCellDef> Opciones </th>
                 <td mat-cell *matCellDef="let element">
@@ -44,7 +38,6 @@
                     fa-white-color" aria-hidden="true"></i> </button>
                   <button class="btn btn-danger separate-icons"><i class="fa fa-trash fa-white-color "></i></button>
                 </td>
-
               </ng-container>
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

@@ -17,7 +17,7 @@ import { UserDetail } from '../models/userDetail';
 })
 export class UsersComponent implements OnInit, OnDestroy {
     ngUnsubscribe = new Subject();
-    displayedColumns: string[] = ['id', 'name', 'lastname', 'job', 'age', 'indicators', 'options'];
+    displayedColumns: string[] = ['id', 'name', 'lastname', 'job', 'age', 'options'];
     userSource = undefined;
     selectedUserIndicator: any = {};
     users: any = [];
@@ -56,15 +56,12 @@ export class UsersComponent implements OnInit, OnDestroy {
 
                 this.users = user;
                 var i = 0;
-
                 this.users.forEach(valor => {
                     this.indicatorService.getUserIndicator(valor.id).pipe(takeUntil(this.ngUnsubscribe))
                         .subscribe(indicator => {
                             this.indicator = indicator;
                             this.getParamsIndicators();
                             valor.indicators = this.orders;
-
-
                             const controls = this.orders.map(c => new FormControl(c.enable));
                             this.form = this.formBuilder.group({
                                 orders: new FormArray(controls)
@@ -75,8 +72,6 @@ export class UsersComponent implements OnInit, OnDestroy {
                 });
             });
     }
-
-    
 
     getParamsIndicators() {
         this.orders = [];
@@ -91,7 +86,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     }
 
     registerModal(user: UserDetail): void {
-        this.userdetailservice.selectedUser = Object.assign({}, user);
+       
         const dialogRef = this.dialog.open(RegisterModalComponent,{
             data: {
              user

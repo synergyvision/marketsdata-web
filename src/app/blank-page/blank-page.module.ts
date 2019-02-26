@@ -6,9 +6,15 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { BlankPageResolver } from './blank-page.resolver';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { CompanyService } from '../services/company.service'
 
 export const BlankPageRoutes = [
-  { path: '', component: BlankPageComponent }
+  { path: '', component: BlankPageComponent, resolve: {
+    comapaniesData: BlankPageResolver
+  } }
 ];
 
 @NgModule({
@@ -21,8 +27,10 @@ export const BlankPageRoutes = [
     MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
-  providers: [BlankPageComponent]
+  providers: [BlankPageComponent, BlankPageResolver, CompanyService]
 })
 export class BlankPageModule { }

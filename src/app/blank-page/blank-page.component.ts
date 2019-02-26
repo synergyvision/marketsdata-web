@@ -5,6 +5,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CompanyService } from '../services/company.service';
 
 @Component({
   selector: 'app-blank-page',
@@ -12,9 +13,11 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./styles/blank-page.component.scss']
 })
 export class BlankPageComponent implements OnInit, OnDestroy {
-  
+    displayedColumns: string[] = ['name', 'marketcap'];
+    dataSource = undefined;
     indicator: any = {};
     form: FormGroup;
+   
     private ngUnsubscribe = new Subject();
     
     orders = [{ enable: false, name: '' },
@@ -24,10 +27,12 @@ export class BlankPageComponent implements OnInit, OnDestroy {
               { enable: false, name: '' }];
 
     constructor(private formBuilder: FormBuilder,
+        public companyService: CompanyService,
         public indicatorService: IndicatorsService,
         public afAuth: AngularFireAuth,
         private route: ActivatedRoute
         ) {
+          this.dataSource = route.snapshot.data['comapaniesData'].data;
             const controls = this.orders.map(c => new FormControl(false));
                 controls[0].setValue(true);
                 this.form = this.formBuilder.group({
