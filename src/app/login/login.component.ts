@@ -32,11 +32,11 @@ export class LoginComponent implements OnInit {
 
     indicator: Indicator ={
       id: '',
-      indicator1: {name: 'Indicador 1', enable: true},
-      indicator2: {name: 'Indicador 2', enable: true},
-      indicator3: {name: 'Indicador 3', enable: true},
-      indicator4: {name: 'Indicador 4', enable: true},
-      indicator5: {name: 'Indicador 5', enable: true},
+      indicator1: {name: 'Earning Yield', enable: true},
+      indicator2: {name: 'Price to Earnings', enable: true},
+      indicator3: {name: 'Return on Equity', enable: true},
+      indicator4: {name: 'Return on Assets', enable: true},
+      //indicator5: {name: 'Return on Capital', enable: true},
     }
 
     validationMessages = {

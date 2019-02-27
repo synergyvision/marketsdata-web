@@ -4,5 +4,5 @@ export interface Indicator{
     indicator2: {name: string, enable: boolean},
     indicator3: {name: string, enable: boolean},
     indicator4: {name: string, enable: boolean},
-    indicator5: {name: string, enable: boolean},
+   // indicator5: {name: string, enable: boolean},
 }

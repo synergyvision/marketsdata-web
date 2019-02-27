@@ -17,7 +17,7 @@ import { UserDetail } from '../models/userDetail';
 })
 export class UsersComponent implements OnInit, OnDestroy {
     ngUnsubscribe = new Subject();
-    displayedColumns: string[] = ['id', 'name', 'lastname', 'job', 'age', 'options'];
+    displayedColumns: string[] = ['name', 'lastname', 'job', 'age', 'options'];
     userSource = undefined;
     selectedUserIndicator: any = {};
     users: any = [];
@@ -109,7 +109,7 @@ export class UsersComponent implements OnInit, OnDestroy {
                     this.indicatorService.updatetUserIndicators(this.selectedUserIndicator);
             });
     }
-    
+   
 
     ngOnDestroy() {
         this.ngUnsubscribe.next();

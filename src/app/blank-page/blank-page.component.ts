@@ -1,6 +1,5 @@
 import { Component,  OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { IndicatorsService } from '../services/indicators.service';
-import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -15,41 +14,24 @@ import { Company } from '../models/company';
   styleUrls: ['./styles/blank-page.component.scss']
 })
 export class BlankPageComponent implements OnInit, OnDestroy {
-    displayedColumns: string[] = ['name', 'marketcap'];
-    
+    displayedColumns: string[];
+    columns: string[] = ['name', 'latestPrice', 'marketcap', 'sector', 'exchange', 'ttmEps'];                                
+    selectedValue : string[];
     indicator: any = {};
-    form: FormGroup;
     dataSource1 : MatTableDataSource<Company>;
+    orders = [];
     @ViewChild('paginator') paginator: MatPaginator;
     private ngUnsubscribe = new Subject();
-    
-    orders = [{ enable: false, name: '' },
-              { enable: false, name: '' },
-              { enable: false, name: '' },
-              { enable: false, name: '' },
-              { enable: false, name: '' }];
-
-    constructor(private formBuilder: FormBuilder,
+  
+    constructor(
         public companyService: CompanyService,
         public indicatorService: IndicatorsService,
         public afAuth: AngularFireAuth,
         private route: ActivatedRoute
         ) {
           this.dataSource1 = new MatTableDataSource(route.snapshot.data['comapaniesData'].data);
-         
-            const controls = this.orders.map(c => new FormControl(false));
-                this.form = this.formBuilder.group({
-                    orders: new FormArray(controls, minSelectedCheckboxes(1))
-                });
+          this.displayedColumns = this.columns;
          }
-  
-    submit() {
-      const selectedOrderIds = this.form.value.orders
-        .map((v, i) => v ? this.orders[i].name: null)
-        .filter(v => v !== null);
-  
-      console.log(selectedOrderIds);
-    }
 
     ngOnInit(): void {
             let user = this.afAuth.auth.currentUser;
@@ -58,13 +40,12 @@ export class BlankPageComponent implements OnInit, OnDestroy {
             .subscribe(indicator =>{
                 this.indicator = indicator;
                 this.getParamsIndicators();
-                const controls = this.orders.map(c => new FormControl(false));
-               
-                this.form = this.formBuilder.group({
-                    orders: new FormArray(controls, minSelectedCheckboxes(1))
-                });
             });
             this.dataSource1.paginator = this.paginator;
+    }
+
+    selectionChanged() {
+      this.displayedColumns = this.columns.concat(this.selectedValue);
     }
 
     getParamsIndicators() {
@@ -81,17 +62,6 @@ export class BlankPageComponent implements OnInit, OnDestroy {
         this.ngUnsubscribe.complete();
     }
 }
-
-function minSelectedCheckboxes(min = 1) {
-    const validator: ValidatorFn = (formArray: FormArray) => {
-      const totalSelected = formArray.controls
-        .map(control => control.value)
-        .reduce((prev, next) => next ? prev + next : prev, 0);
-  
-      return totalSelected >= min ? null : { required: true };
-    };
-    return validator;
-  }
 
   function getProp (obj, key) {
     return key.split('.').reduce( function (o, x) {
