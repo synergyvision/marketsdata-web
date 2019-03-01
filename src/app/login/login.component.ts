@@ -32,10 +32,10 @@ export class LoginComponent implements OnInit {
 
     indicator: Indicator ={
       id: '',
-      indicator1: {name: 'Earning Yield', enable: true},
-      indicator2: {name: 'Price to Earnings', enable: true},
-      indicator3: {name: 'Return on Equity', enable: true},
-      indicator4: {name: 'Return on Assets', enable: true},
+      indicator1: {name: 'Earning Yield', enable: true, value: 'earningYield'},
+      indicator2: {name: 'Price to Earnings', enable: true, value: 'peRatio'},
+      indicator3: {name: 'Return on Equity', enable: true, value:'returnOnEquity'},
+      indicator4: {name: 'Return on Assets', enable: true, value: 'returnOnAssets'},
       //indicator5: {name: 'Return on Capital', enable: true},
     }
 
