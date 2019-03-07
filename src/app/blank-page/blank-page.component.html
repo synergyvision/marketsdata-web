@@ -13,8 +13,6 @@
                 <option *ngFor="let item of exchanges" [value]="item" >{{item}}</option>
             </select>
           </div>
-      
-      
         <label class="form-label form-label-big col-sm-2">SECTOR</label>
         <div class="col-sm-3">
             <select class="form-control" formControlName="sector" [id]="'sector'">
@@ -30,26 +28,27 @@
               <input type="text" class="form-control" formControlName="marketcap" [id]="'marketcap'" placeholder="MarketCap">
           </div>
           <div class="validation-errors col-sm-10 col-sm-offset-2">
-            <div class="help-block" *ngIf="form.get('marketcap').errors && form.get('marketcap').dirty && form.get('marketcap').errors.marketCap">
+            <div class="help-block" *ngIf="form.get('marketcap').errors && form.get('marketcap').dirty && form.get('marketcap').errors.numValidator">
               MarketCap debe ser mayor que 50 millones
             </div>
           </div>
       </div>
         
-      <div class="form-group">
+      <div class="form-group" [ngClass]="{ 'has-error': ((form.get('peratio').errors) && (form.get('peratio').dirty)) }">
         <label class="form-label form-label-big col-sm-2">P/E RATIO</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" formControlName="marketcap" [id]="'marketcap'" placeholder="Price to earnings">
+          <input type="text" class="form-control" formControlName="peratio" [id]="'peratio'" placeholder="Price to earnings">
         </div>
         <div class="validation-errors col-sm-10 col-sm-offset-2">
-          <div class="help-block" *ngIf="false">
-            P/E raito debe ser mayor que 5
+          <div class="help-block" *ngIf="form.get('peratio').errors && form.get('peratio').dirty && form.get('peratio').errors.numValidator">
+            El indicador Price to earnings debe ser mayor que 5
           </div>
         </div>
       </div>
      
       <div class="text-center">
-              <input class="btn btn-form" type="submit" value="Filtrar" [disabled]="!form.valid">
+          <input class="btn btn-form" type="submit" value="Filtrar" [disabled]="!form.valid">&nbsp;
+          <input class="btn btn-form" type="reset" value="Reset" (click)="resetForm()">
       </div>
     </form>
 </div>     

@@ -7,7 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { CompanyService } from '../services/company.service';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { Company } from '../models/company';
-import { FormGroup, FormBuilder, FormControl, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, AbstractControl, ValidatorFn } from '@angular/forms';
 import { SectorService } from '../services/sector.service';
 
 @Component({
@@ -16,6 +16,7 @@ import { SectorService } from '../services/sector.service';
   styleUrls: ['./styles/blank-page.component.scss']
 })
 export class BlankPageComponent implements OnInit, OnDestroy {
+    
     form: FormGroup;
     displayedColumns: string[];
     columns: string[] = ['rank','name', 'latestPrice', 'marketcap', 'sector', 'exchange', 'ttmEps'];                                
@@ -44,8 +45,8 @@ export class BlankPageComponent implements OnInit, OnDestroy {
           this.form = formBuilder.group({
             exchange: new FormControl(''),
             sector: new FormControl(''),
-            marketcap: new FormControl('',[marketCapValidator]),
-            peratio: new FormControl('')
+            marketcap: new FormControl('',[numValidator(50000000)]),
+            peratio: new FormControl('',[numValidator(5)])
           });
           this.data = route.snapshot.data['comapaniesData'].data;
           this.data.forEach(value => {
@@ -128,26 +129,32 @@ export class BlankPageComponent implements OnInit, OnDestroy {
     onSubmit() {
       this.dataFijaMovil = [];
       this.dataMovil = [];
-
+      let marketcap = parseInt(this.form.value.marketcap);
+      let peratio = parseInt(this.form.value.peratio);
       if(this.form.value.exchange == 'Todos' && this.form.value.sector == 'Todos') {
           this.dataFija.forEach(value => {
+            if(value.peRatio >= peratio && value.marketCap >= marketcap){
               this.dataFijaMovil.push(value);
+            }
           });
       } else if(this.form.value.exchange == 'Todos') {
         this.dataFija.forEach(value => {
-            if(value.sector == this.form.value.sector){
+            if(value.sector == this.form.value.sector && 
+              value.peRatio >= peratio && value.marketCap >= marketcap){
                 this.dataFijaMovil.push(value);
             }  
         });
       } else if(this.form.value.sector == 'Todos') {
         this.dataFija.forEach(value => {
-            if(value.exchange == this.form.value.exchange){
+            if(value.exchange == this.form.value.exchange && 
+              value.peRatio >= peratio && value.marketCap >= marketcap){
                 this.dataFijaMovil.push(value);
             }  
         });
       } else {
           this.dataFija.forEach(value => {
-            if(value.exchange == this.form.value.exchange && value.sector == this.form.value.sector) {
+            if(value.exchange == this.form.value.exchange && value.sector == this.form.value.sector && 
+              value.peRatio >= peratio && value.marketCap >= marketcap) {
               this.dataFijaMovil.push(value);
             }
         });
@@ -156,8 +163,29 @@ export class BlankPageComponent implements OnInit, OnDestroy {
       this.dataFijaMovil.forEach(value => {
         this.dataMovil.push(value);
       });
-        this.dataSource1 = new MatTableDataSource(this.dataFijaMovil);
+      if( typeof(this.selectedValue) !== 'undefined' && this.selectedValue.length>0  ){
+        this.dataMovil = this.getRanking(this.selectedValue);
+      }
+        this.dataSource1 = new MatTableDataSource(this.dataMovil);
         this.dataSource1.paginator = this.paginator;
+    }
+
+    resetForm(){
+      this.dataFijaMovil = [];
+      this.dataMovil = [];
+      
+      this.dataFija.forEach(value => {
+          this.dataFijaMovil.push(value);
+      });
+
+      this.dataFijaMovil.forEach(value => {
+        this.dataMovil.push(value);
+      });
+      if( typeof(this.selectedValue) !== 'undefined' && this.selectedValue.length>0  ){
+        this.dataMovil = this.getRanking(this.selectedValue);
+      }
+      this.dataSource1 = new MatTableDataSource(this.dataMovil);
+      this.dataSource1.paginator = this.paginator;
     }
 
     getParamsIndicators() {
@@ -181,9 +209,12 @@ export class BlankPageComponent implements OnInit, OnDestroy {
     }, obj);
 };
 
-function marketCapValidator(control: AbstractControl): { [key: string]: boolean } | null {
-  if (control.value !== undefined && (isNaN(control.value) || control.value < 50000000)) {
-      return { 'marketCap': true };
-  }
-  return null;
+function numValidator(top: number): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: boolean } | null => {
+    if (control.value !== undefined && (isNaN(control.value) || control.value < top )) {
+        return { 'numValidator': true };
+    }
+    return null;
+  };
 }
+
