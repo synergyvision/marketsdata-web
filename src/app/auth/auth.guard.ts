@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-
 import { AngularFireModule } from '@angular/fire';
 import { Observable } from 'rxjs';
 import { take, map, tap } from 'rxjs/operators';
@@ -24,12 +23,11 @@ export class AuthGuard implements CanActivate {
                 map(state => !!state),
                 tap(loggedIn => {
                   if (!loggedIn) {
-                    console.log('You must be logged in.');
                     this.router.navigate(['/login']);
                   } 
                 })
               );
             }
             return true;
-          }
+        }
 }

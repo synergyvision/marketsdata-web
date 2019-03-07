@@ -1,4 +1,6 @@
-
+<p *ngFor="let item of cities">{{item.name}}</p>
+<button (click)="changeQuery(this.cities.length-1)">Next</button>
+<!-- 
 
 <div id="dashboard" class="row">
   <div class="col-lg-12">
@@ -118,7 +120,7 @@
         <div class="orders-left">
           <i class="fa fa-shopping-cart"></i>
           <span class="orders-text">ORDERS</span>
-          <!-- <span class="orders-number">633</span> -->
+          !--< <span class="orders-number">633</span> 
           <mat-button-toggle-group vertical="true" multiple="false" value="day" #ordersValue="matButtonToggleGroup">
             <mat-button-toggle value="day">DAY</mat-button-toggle>
             <mat-button-toggle value="week">WEEK</mat-button-toggle>
@@ -418,4 +420,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

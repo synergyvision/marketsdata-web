@@ -178,6 +178,6 @@ export class ControlsAndValidationsPageComponent {
 
   onSubmit(): void {
     // console.log('model-based form submitted');
-    // console.log(this.form.value);
+     console.log(this.form.value);
   }
 }

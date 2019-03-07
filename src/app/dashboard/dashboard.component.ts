@@ -1,6 +1,8 @@
 import { Component, ViewEncapsulation, Inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { APP_BASE_HREF, isPlatformBrowser } from '@angular/common';
+import { CityService } from '../services/city.service';
+import { SectorService } from '../services/sector.service';
 
 
 @Component({
@@ -17,7 +19,7 @@ import { APP_BASE_HREF, isPlatformBrowser } from '@angular/common';
 })
 
 export class DashboardPageComponent implements OnInit {
-  
+  cities = [];
   charts: any = {};
   orders = [
     { title: 'Completed Orders', day: 35, week: 120, month: 499 },
@@ -33,7 +35,8 @@ export class DashboardPageComponent implements OnInit {
   isBrowser: boolean;
 
   constructor(
-    
+    public cityService: CityService,
+    public sectorService: SectorService,
     route: ActivatedRoute,
     @Inject(APP_BASE_HREF) private baseHref: string,
     @Inject(PLATFORM_ID) private platformId: Object
@@ -49,8 +52,15 @@ export class DashboardPageComponent implements OnInit {
     this.tableDataSource = route.snapshot.data['table'].data;
   }
 
-
-
-  ngOnInit(): void { 
+  ngOnInit(): void {
+      this.cityService.getCiudades().subscribe((city)=>{
+        this.cities = city;
+      })
   }
+
+  changeQuery(num){
+    console.log(num);
+  }
+
+
 }

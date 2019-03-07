@@ -7,6 +7,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CompanyService } from '../services/company.service'
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MarketcapPipe } from './marketcap-pipe';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export const BlankPageRoutes = [
   { path: '', component: BlankPageComponent, resolve: {
@@ -16,14 +18,17 @@ export const BlankPageRoutes = [
 
 @NgModule({
   declarations: [
-    BlankPageComponent
+    BlankPageComponent,
+    MarketcapPipe
   ],
   imports: [
     RouterModule.forChild(BlankPageRoutes),
     CommonModule,
     MatTableModule,
     MatPaginatorModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [BlankPageComponent, BlankPageResolver, CompanyService]
 })

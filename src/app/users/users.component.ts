@@ -109,15 +109,12 @@ export class UsersComponent implements OnInit, OnDestroy {
                     this.indicatorService.updatetUserIndicators(this.selectedUserIndicator);
             });
     }
-   
-
+    
     ngOnDestroy() {
         this.ngUnsubscribe.next();
         this.ngUnsubscribe.complete();
     }
 }
-
-
 
 function getProp(obj, key) {
     return key.split('.').reduce(function (o, x) {
