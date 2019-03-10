@@ -21,6 +21,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { RegisterModalComponent } from './utils/pages/modals/templates/register/register.component';
+import { NotificationsPageComponent } from './utils';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { RegisterModalComponent } from './utils/pages/modals/templates/register/
     {
       provide: APP_BASE_HREF,
       useValue: `${environment.BASE_URL}`
-    }
+    },
+    NotificationsPageComponent
   ]
 })
 export class AppModule { }

@@ -19,11 +19,7 @@ export class AuthService {
   }
 
   loginUser(email: string, password: string) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-    .then(() => {
-        
-    })
-    .catch(error => console.log(error));
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
   logoutUser() {

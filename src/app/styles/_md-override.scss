@@ -104,7 +104,7 @@ mat-checkbox {
     &:hover,
     &:focus {
       &:not(.mat-option-disabled) {
-        background-color: $purple;
+        background-color: $azulMarino;
         color: $white;
       }
     }
@@ -277,7 +277,7 @@ mat-slide-toggle {
         }
 
         .mat-slide-toggle-bar {
-          background-color: $purple;
+          background-color: $azulMarino;
         }
       }
     }
@@ -361,7 +361,7 @@ mat-tab-group {
         background-color: rgba(144, 19, 254, .09);
 
         .mat-tab-label {
-          color: $purple;
+          color: $azulMarino;
           flex-basis: 100%;
           font-size: 12px;
           font-weight: bold;
@@ -370,7 +370,7 @@ mat-tab-group {
 
           &:focus,
           &.mat-tab-label-active {
-            background-color: $purple;
+            background-color: $azulMarino;
             color: $white;
           }
         }
@@ -395,7 +395,7 @@ mat-tab-group {
       margin: 0px;
 
       .mat-chip {
-        border: 1px solid $purple;
+        border: 1px solid $azulMarino;
         border-radius: 4px;
         box-shadow: none;
         font-size: $font-size-sm;
@@ -405,8 +405,8 @@ mat-tab-group {
         // padding: 4px 7px;
 
         &.filled {
-          background-color: $purple;
-          color: $white;
+          background-color: $azulMarino;
+          color: $naranja;
 
           .fa {
             color: $white;
@@ -415,10 +415,10 @@ mat-tab-group {
 
         &.regular {
           background-color: transparent;
-          color: $purple;
+          color: $azulMarino;
 
           .fa {
-            color: $purple;
+            color: $azulMarino;
           }
         }
 

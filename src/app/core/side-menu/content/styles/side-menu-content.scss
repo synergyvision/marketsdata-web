@@ -1,7 +1,8 @@
+@import '../../../../styles/variables';
 app-side-menu-content {
 	display: block;
 	height: 100%;
-	background-image: linear-gradient(to bottom, #182f58, #182f58);
+	background-image: linear-gradient(to bottom, $azulMarino, $azulMarino);
 
 	.menu-item-icon
 	{
@@ -35,7 +36,7 @@ app-side-menu-content {
 		&.active
 		{
 			background: #FFF;
-			color: #9012fe;
+			color: $naranja;
 		}
 	}
 

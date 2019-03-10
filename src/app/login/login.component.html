@@ -5,44 +5,52 @@
       <!-- logo -->
       <div id="logo" class="logo text-center">
         <a [routerLink]="['/login']">
-          <img class="imagewmargin" id="logo_img" style="height:110px" src="https://synergy.vision/img/vision-white.png"
-            alt="">
+          <img class="imagewmargin" id="logo_img" style="height:110px" src="../../assets/imgs/synergy-vision-white.png">
         </a>
       </div>
       <div class="card">
         <header class="row title">
-
           <div class="col-xs-12 text-center">
-
-            <h2 class="main-title">Login</h2>
+            <h2 class="main-title">LOGIN</h2>
           </div>
         </header>
         <form name="form" class="form-horizontal form-stacked" [formGroup]="formLogin" (ngSubmit)="loginUser()">
           <div class="form-group"
             [ngClass]="{ 'has-error': ((formLogin.get('email').invalid) && (formLogin.get('email').touched)) }">
-            <label class="form-label col-xs-12" for="email">EMAIL ADDRESS<em>*</em></label>
+            <label class="form-label col-xs-12" for="email">CORREO<em>*</em></label>
             <div class="col-xs-12">
               <input type="email" class="form-control" formControlName="email" placeholder="Email" name="email">
             </div>
-            <div class="validation-errors col-sm-10">
+            <div class="validation-errors col-sm-6">
               <ng-container *ngFor="let validation of validationMessages.email">
                 <div class="help-block"
-                  *ngIf="formLogin.get('email').hasError(validation.type) && (formLogin.get('email').dirty || formLogin.get('email').touched)">
+                  *ngIf="formLogin.get('email').hasError(validation.type) && (formLogin.get('email').dirty || 
+                  formLogin.get('email').touched)">
+                  {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+          </div>
+          <div class="form-group" 
+          [ngClass]="{ 'has-error': ((formLogin.get('password').invalid) && (formLogin.get('password').touched)) }">
+            <label class="form-label col-xs-12">CONTRASEÑA<em>*</em></label>
+            <div class="col-xs-12">
+              <input type="password" class="form-control" formControlName="password" placeholder="Password"
+                name="password">
+            </div>
+            <div class="validation-errors col-sm-7">
+              <ng-container *ngFor="let validation of validationMessages.password">
+                <div class="help-block"
+                  *ngIf="formLogin.get('password').hasError(validation.type) && (formLogin.get('password').dirty || 
+                  formLogin.get('password').touched)">
                   {{ validation.message }}
                 </div>
               </ng-container>
             </div>
           </div>
           <div class="form-group">
-            <label class="form-label col-xs-12">PASSWORD<em>*</em></label>
             <div class="col-xs-12">
-              <input type="password" class="form-control" formControlName="password" placeholder="Password"
-                name="password">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-xs-12">
-              <span class="help-block"><em>*</em> Required fields.</span>
+              <span class="help-block"><em>*</em> Campos obligatorios.</span>
             </div>
           </div>
           <div class="form-group">
@@ -54,19 +62,17 @@
           </div>
           <div class="form-group">
             <div class="col-xs-12 text-center">
-              <input class="btn btn-form" type="submit" value="LOGIN">
+              <input class="btn btn-form" type="submit" [disabled]="!formLogin.valid" value="LOGIN">
             </div>
           </div>
         </form>
       </div>
     </div>
-
   </div>
-
 </div>
 
 
-<div class="col-md-6">
+<!-- <div class="col-md-6">
   <div class="card">
     <header class="row title">
       <div class="col-xs-12 text-center">
@@ -122,4 +128,4 @@
       </div>
     </form>
   </div>
-</div>
+</div> -->

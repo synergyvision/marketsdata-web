@@ -10,13 +10,14 @@ import { UserdetailService } from '../services/userdetail.service';
 import { Indicator } from '../models/indicator';
 import { IndicatorsService } from '../services/indicators.service';
 
+import { NotificationsPageComponent } from '../utils';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./styles/login.component.scss']
 })
 export class LoginComponent implements OnInit {
-    
+   
     public formLogin: FormGroup;
     public userSignUp: any = {};
     public usersCollection: AngularFirestoreCollection<UserDetail>;
@@ -41,15 +42,16 @@ export class LoginComponent implements OnInit {
 
     validationMessages = {
       email: [
-        { type: 'required', message: 'Email is required.' },
-        { type: 'email', message: 'Email must be valid.' }
+        { type: 'required', message: 'El correo es obligatorio.' },
+        { type: 'email', message: 'El correo debe ser válido.' }
       ],
       password: [
-        { type: 'required', message: 'Password is required.' }
+        { type: 'required', message: 'La contraseña es obligatoria' }
       ]
     };
 
     constructor(
+      public notificacion: NotificationsPageComponent,
       public indicatorService: IndicatorsService,
       public userDetailService: UserdetailService,
       public afAuth: AngularFireAuth,
@@ -84,8 +86,16 @@ export class LoginComponent implements OnInit {
     loginUser(){
         this.authService.loginUser(this.formLogin.get('email').value, this.formLogin.get('password').value)
         .then(() => {
+          this.notificacion.showNotification('top', 'center', 'success', 'check-square','Has ingresado correctamente')
             this.router.navigate(['/']);
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+              if(error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
+                this.notificacion.showNotification('top', 'center', 'danger', 'times-circle','Correo o contraseña incorrectos');
+                this.formLogin.reset();
+              } else {
+                console.log(error.code);
+              }
+        });
     }
 }

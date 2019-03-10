@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {  UsersResolver } from './users.resolve';
-import { TableDataService } from '../tables/services/table-data.service';
 import { MatTableModule } from '@angular/material/table';
 import { UserdetailService } from '../services/userdetail.service';
 
@@ -31,7 +30,6 @@ export const UsersRoutes = [
     MatTableModule,
   ],
   providers: [UsersComponent,
-              TableDataService,
               UsersResolver,
               UserdetailService
   ]

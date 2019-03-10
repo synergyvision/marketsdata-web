@@ -15,7 +15,7 @@ export const LoginRoutes = [
   imports: [
     RouterModule.forChild(LoginRoutes),
     FormsModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
   ],
   providers: [LoginComponent]
 })

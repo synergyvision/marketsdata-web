@@ -13,17 +13,17 @@ export class NotificationsPageComponent {
 
   constructor(public snackBar: MatSnackBar) {}
 
-  showNotification(vpos, hpos, type, icon = ''): void {
+  showNotification(vpos, hpos, type, icon = '', msg): void {
     // for more info about Angular Material snackBar check: https://material.angular.io/components/snack-bar/overview
     this.mySnackBarRef = this.snackBar.openFromComponent(NotificationComponent, {
        data: {
-         message: 'This is a nice notification positioned in the ' + vpos + ' ' + hpos,
+         message: msg,
          icon,
          type,
          dismissible: true
          // you can add everything you want here
        },
-       duration: 2000,
+       duration: 3000,
        horizontalPosition: hpos, // 'start' | 'center' | 'end' | 'left' | 'right'
        verticalPosition: vpos, // 'top' | 'bottom'
        panelClass: ['notification-wrapper']

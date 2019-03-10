@@ -1,19 +1,14 @@
 <app-condense #condenseMenu [ngClass]="condenseMenu.menuState">
-  <a class="simple-menu-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/dashboard']">
-    <i class="menu-item-icon fa fa-tachometer"></i>
-    <span class="menu-item-title">Dashboard</span>
-  </a>
-
-  <a class="simple-menu-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/blank-page']">
-    <i class="menu-item-icon fa fa-tachometer"></i>
-    <span class="menu-item-title">Blank Page</span>
-  </a>
-
   <a class="simple-menu-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/users']">
-    <i class="menu-item-icon fa fa-tachometer"></i>
-    <span class="menu-item-title">Users</span>
+    <i class="menu-item-icon fa fa-address-card-o"></i>
+    <span class="menu-item-title">Usuarios</span>
   </a>
-
+  
+  <a class="simple-menu-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/ranking']">
+    <i class="menu-item-icon fa fa-line-chart"></i>
+    <span class="menu-item-title">Ranking</span>
+  </a>
+  
   <!-- Forms section -->
   <mat-expansion-panel class="expandable-menu-item" #formsExpandableSection="routerLinkActive" [expanded]="false" [routerLinkActive]="['active']">
     <mat-expansion-panel-header>

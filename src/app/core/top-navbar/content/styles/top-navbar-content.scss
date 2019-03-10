@@ -59,6 +59,10 @@ app-top-navbar-content {
             left: -6px;
           }
         }
+
+        .fa {
+          color: $naranja;
+        }
       }
 
       &.menu-visible {
@@ -71,7 +75,7 @@ app-top-navbar-content {
         }
 
         .fa {
-          color: $red2;
+          color: $naranja;
         }
       }
     }

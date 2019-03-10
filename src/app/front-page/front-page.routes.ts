@@ -7,15 +7,15 @@ export const rootRoutes: Routes = [
       path: '', 
       component: FrontPageComponent, 
       children:[
-        { path: '', redirectTo: 'dashboard' },
-        { path: 'dashboard', loadChildren: '../dashboard/dashboard.module#DashboardModule' },
+        { path: '', redirectTo: 'users' },
         { path: 'forms', loadChildren: '../forms/forms.module#FormsModule' },
         { path: 'tables', loadChildren: '../tables/tables.module#TablesModule' },
         { path: 'charts', loadChildren: '../charts/charts.module#ChartsModule' },
         { path: 'utils', loadChildren: '../utils/utils.module#UtilsModule' },
         { path: 'layouts', loadChildren: '../layouts/layouts.module#LayoutsModule' },
-        { path: 'blank-page', loadChildren: '../blank-page/blank-page.module#BlankPageModule' },
+        { path: 'ranking', loadChildren: '../blank-page/blank-page.module#BlankPageModule' },
         { path: 'users', loadChildren: '../users/users.module#UsersModule' },
+        { path: 'company/:id', loadChildren: '../company/company.module#CompanyModule' }
       ]},
       {
         path: '404',
