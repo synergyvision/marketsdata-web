@@ -63,6 +63,7 @@
     "@angular/compiler-cli": "7.1.0",
     "@angular/language-service": "7.1.0",
     "@types/node": "^8.0.30",
+    "angular-cli-ghpages": "^0.5.3",
     "codelyzer": "^4.0.2",
     "cpy-cli": "^1.0.1",
     "express": "^4.16.4",

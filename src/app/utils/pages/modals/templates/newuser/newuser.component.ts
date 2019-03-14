@@ -45,14 +45,18 @@ export class NewUserComponent implements OnInit, OnDestroy {
         ])),
         password: new FormControl('', [Validators.required, Validators.minLength(6)]),
         name: new FormControl('', Validators.required),
-        lastName: new FormControl('', Validators.required)
+        lastName: new FormControl('', Validators.required),
+        admin: new FormControl(false)
     });
   }
 
   registerUser() {
+    console.log(this.form.value);
+    
     this.userDetails.email = this.form.value.email;
     this.userDetails.name = this.form.value.name;
     this.userDetails.lastName = this.form.value.lastName;
+    this.userDetails.admin = this.form.value.admin;
     this.user.email = this.form.value.email;
     this.user.password = this.form.value.password;
     this.userdetailservice.addUser(this.user).subscribe(

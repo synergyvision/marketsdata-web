@@ -17,7 +17,6 @@ import { Subject } from 'rxjs';
 })
 export class TopNavbarContentComponent  implements OnInit, OnDestroy {
  
-  
   @Input() messages = [];
   @Input() notifications = [];
   user: any = {};

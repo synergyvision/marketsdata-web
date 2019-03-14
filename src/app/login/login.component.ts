@@ -4,13 +4,14 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { UserDetail } from'../models/userDetail';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { UserdetailService } from '../services/userdetail.service';
 import { Indicator } from '../models/indicator';
 import { IndicatorsService } from '../services/indicators.service';
 
 import { NotificationsPageComponent } from '../utils';
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -22,12 +23,15 @@ export class LoginComponent implements OnInit {
     public userSignUp: any = {};
     public usersCollection: AngularFirestoreCollection<UserDetail>;
     public users: Observable<UserDetail[]>;
-    
+    public userD: any = {};
+    private ngUnsubscribe = new Subject();
+
     user: UserDetail ={
         id: '',
         name: '',
         lastName: '',
-        email: ''
+        email: '',
+        admin: true
     };
 
     indicator: Indicator ={
@@ -84,11 +88,27 @@ export class LoginComponent implements OnInit {
       .catch(error => console.log(error));
     }
 
-    loginUser(){
+    loginUser() {
         this.authService.loginUser(this.formLogin.get('email').value, this.formLogin.get('password').value)
         .then(() => {
-          this.notificacion.showNotification('top', 'center', 'success', 'check-square','Has ingresado correctamente');
-            this.router.navigate(['/']);
+         let user = this.afAuth.auth.currentUser;
+         let userId = user.uid;
+         let userdetail = this.userDetailService.getUserDetailWithoutId(userId);
+         userdetail.get().pipe(takeUntil(this.ngUnsubscribe))
+          .subscribe(user =>{
+            this.userD = user.data();
+
+            if(!this.userD.admin) {
+              this.notificacion.showNotification('top', 'center', 'danger', 'times-circle','No puedes ingresar a esta pagina');
+                this.authService.logoutUser()
+                .then(() => {
+                    this.router.navigate(['/login']);
+              }).catch(error => console.log(error));
+            } else {
+              this.notificacion.showNotification('top', 'center', 'success', 'check-square','Has ingresado correctamente');
+              this.router.navigate(['/']);
+            }
+          });
         })
         .catch(error => {
               if(error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {

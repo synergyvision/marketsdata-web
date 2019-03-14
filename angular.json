@@ -10,7 +10,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/browser",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main/main.browser.ts",
             "tsConfig": "src/tsconfig.app.json",
@@ -101,7 +101,7 @@
           }
         }
       }
-    },
+    }
   },
   "defaultProject": "angular-admin-template",
   "schematics": {
