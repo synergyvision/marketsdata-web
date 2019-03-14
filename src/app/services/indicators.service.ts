@@ -52,6 +52,11 @@ export class IndicatorsService {
       this.indicatorsCollection.doc(userId).set(indicator);
     }
 
+    deleteIndicators(idUser) {
+      this.indicatorDoc = this.afs.doc<Indicator>(`indicators/${idUser}`);
+      this.indicatorDoc.delete();
+    }
+
     updatetUserIndicators(indicator: Indicator){
       let idIndicator = indicator.id;
       indicator.id = '';

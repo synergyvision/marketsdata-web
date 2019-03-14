@@ -22,7 +22,7 @@ export class UserdetailService {
   public users: Observable<UserDetail[]>;
   public userDoc: AngularFirestoreDocument<UserDetail>;
   public user: Observable<UserDetail>;
-  public userUrl = `http://localhost:3000/user`;
+  public userUrl = `https://marketsdata.herokuapp.com/user`;
 
     constructor( 
         private http: HttpClient,

@@ -87,6 +87,7 @@ export class UsersComponent implements OnInit, OnDestroy {
           dialogRef.afterClosed().subscribe(result => {
             if (result) {
               this.userdetailservice.deleteUser(id).subscribe();
+              this.indicatorService.deleteIndicators(id);
                 this.dialog.open(AlertComponent, {
                     data: {
                       icon: 'check-circle',
