@@ -1,0 +1,56 @@
+<div class="full-height background-img">
+    <div class="container-fluid center-block">
+  
+      <div class="col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-4 text-center">
+        <!-- logo -->
+        <div id="logo" class="logo text-center">
+          <a [routerLink]="['/login']">
+            <img class="imagewmargin" id="logo_img" style="height:110px" src="../../assets/imgs/synergy-vision-white.png">
+          </a>
+        </div>
+        <div class="card">
+            <header class="row title">
+              <div class="col-xs-12 text-center">
+                <h2 class="main-title">Register Form</h2>
+              </div>
+            </header>
+            <form class="form-horizontal form-stacked" [formGroup]="form" (ngSubmit) = "createUser()">
+                <div class="form-group">
+                    <label class="form-label col-xs-12">NOMBRE<em>*</em></label>
+                    <div class="col-xs-12">
+                      <input type="text" class="form-control" formControlName="name" placeholder="Nombre"  name="nombre">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label col-xs-12">APELLIDO<em>*</em></label>
+                    <div class="col-xs-12">
+                      <input type="text" class="form-control" formControlName="lastName" placeholder="Apellido"  name="apellido">
+                    </div>
+                </div>
+              <div class="form-group">
+                <label class="form-label col-xs-12">EMAIL ADDRESS<em>*</em></label>
+                <div class="col-xs-12">
+                  <input type="email" class="form-control" formControlName="email" placeholder="Email"  name="email">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label col-xs-12">PASSWORD<em>*</em></label>
+                <div class="col-xs-12">
+                  <input type="password" class="form-control" formControlName="password" placeholder="Password" name="password">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-xs-12">
+                  <span class="help-block"><em>*</em> Required fields.</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-xs-12 text-center">
+                <input class="btn btn-form" type="submit" value="CREAR CUENTA">
+                </div>
+              </div>
+            </form>
+          </div>
+      </div>
+    </div>
+  </div>

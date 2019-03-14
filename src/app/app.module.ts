@@ -23,12 +23,14 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { RegisterModalComponent } from './utils/pages/modals/templates/register/register.component';
 import { NewUserComponent } from './utils/pages/modals/templates/newuser/newuser.component';
 import { NotificationsPageComponent } from './utils';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    RegisterComponent,
     RecoverPasswordComponent,
     ChangePasswordComponent,
     RegisterModalComponent,
