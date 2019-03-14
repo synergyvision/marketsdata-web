@@ -1,3 +1,4 @@
+
 <div id="regular-tables">
   <div class="row">
     <div class="col-xs-12">
@@ -9,9 +10,10 @@
             <hr class="line">
           </div>
         </header>
+        <button class="btn btn-form float-right" (click)="newUserModal()">Crear usuario</button>
         <div class="row">
           <div class="col-xs-12 table-wrapper">
-            <table mat-table [dataSource]="userSource" class="table table-stripes">
+            <table mat-table [dataSource]="dataSource" class="table table-stripes">
               <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef> Nombre </th>
                 <td mat-cell *matCellDef="let element"> {{element.name}} </td>
@@ -20,20 +22,16 @@
                 <th mat-header-cell *matHeaderCellDef> Apellido </th>
                 <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
               </ng-container>
-              <ng-container matColumnDef="age">
-                <th mat-header-cell *matHeaderCellDef> Edad </th>
-                <td mat-cell *matCellDef="let element"> {{element.age}} </td>
-              </ng-container>
-              <ng-container matColumnDef="job">
-                <th mat-header-cell *matHeaderCellDef> Trabajo </th>
-                <td mat-cell *matCellDef="let element"> {{element.job}} </td>
+              <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef> Email </th>
+                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
               </ng-container>
               <ng-container matColumnDef="options">
                 <th mat-header-cell *matHeaderCellDef> Opciones </th>
                 <td mat-cell *matCellDef="let element">
                   <button class="btn btn-primary" (click)=" registerModal(element)"><i class=" fa fa-pencil-square-o
                     fa-white-color" aria-hidden="true"></i> </button>
-                  <button class="btn btn-danger separate-icons"><i class="fa fa-trash fa-white-color "></i></button>
+                  <button class="btn btn-danger separate-icons" (click)="deleteUser(element.id)"><i class="fa fa-trash fa-white-color "></i></button>
                 </td>
               </ng-container>
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

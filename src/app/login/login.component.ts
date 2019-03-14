@@ -27,8 +27,7 @@ export class LoginComponent implements OnInit {
         id: '',
         name: '',
         lastName: '',
-        age: '',
-        job: ''
+        email: ''
     };
 
     indicator: Indicator ={
@@ -74,11 +73,13 @@ export class LoginComponent implements OnInit {
     ngOnInit() {}
 
     createUser(){
-      this.authService.registerUser( this.userSignUp.email, this.userSignUp.password )
+      this.authService.registerUser( this.user.email, this.userSignUp.password )
       .then(() => {
-            this.userDetailService.insertUserDetails(this.user);
-            this.indicatorService.insertUserIndicators(this.indicator);
-            this.router.navigate(['/']);
+          let currentUser = this.afAuth.auth.currentUser;
+          let userId = currentUser.uid;
+          this.userDetailService.insertUserDetails(this.user, userId);
+          this.indicatorService.insertUserIndicators(this.indicator, userId);
+          this.router.navigate(['/']);
       })
       .catch(error => console.log(error));
     }
@@ -86,7 +87,7 @@ export class LoginComponent implements OnInit {
     loginUser(){
         this.authService.loginUser(this.formLogin.get('email').value, this.formLogin.get('password').value)
         .then(() => {
-          this.notificacion.showNotification('top', 'center', 'success', 'check-square','Has ingresado correctamente')
+          this.notificacion.showNotification('top', 'center', 'success', 'check-square','Has ingresado correctamente');
             this.router.navigate(['/']);
         })
         .catch(error => {

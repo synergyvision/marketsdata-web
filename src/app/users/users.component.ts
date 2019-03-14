@@ -6,9 +6,12 @@ import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatTableDataSource } from '@angular/material';
 import { RegisterModalComponent } from '../utils/pages/modals/templates/register/register.component';
+import { NewUserComponent } from '../utils/pages/modals/templates/newuser/newuser.component';
 import { UserDetail } from '../models/userDetail';
+import { AlertComponent } from '../shared';
+import { NotificationsPageComponent } from '../utils';
 
 @Component({
     selector: 'app-users',
@@ -17,13 +20,14 @@ import { UserDetail } from '../models/userDetail';
 })
 export class UsersComponent implements OnInit, OnDestroy {
     ngUnsubscribe = new Subject();
-    displayedColumns: string[] = ['name', 'lastname', 'job', 'age', 'options'];
+    displayedColumns: string[] = ['name', 'lastname', 'email', 'options'];
     userSource = undefined;
     selectedUserIndicator: any = {};
     users: any = [];
     indicator: any = {};
     formA: FormGroup[] = [];
     form: FormGroup;
+    dataSource: MatTableDataSource<UserDetail>;
 
     orders = [{ enable: false, name: '' },
     { enable: false, name: '' },
@@ -36,9 +40,11 @@ export class UsersComponent implements OnInit, OnDestroy {
         private afAuth: AngularFireAuth,
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        public notificacion: NotificationsPageComponent
     ) {
         this.userSource = route.snapshot.data['userData'].data;
+        this.dataSource= new MatTableDataSource(this.userSource);
         const controls = this.orders.map(c => new FormControl(false));
         this.form = this.formBuilder.group({
             orders: new FormArray(controls)
@@ -50,26 +56,9 @@ export class UsersComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-
         this.userdetailservice.getUsersDetails().pipe(takeUntil(this.ngUnsubscribe))
             .subscribe(user => {
-
-                this.users = user;
-                var i = 0;
-                this.users.forEach(valor => {
-                    this.indicatorService.getUserIndicator(valor.id).pipe(takeUntil(this.ngUnsubscribe))
-                        .subscribe(indicator => {
-                            this.indicator = indicator;
-                            this.getParamsIndicators();
-                            valor.indicators = this.orders;
-                            const controls = this.orders.map(c => new FormControl(c.enable));
-                            this.form = this.formBuilder.group({
-                                orders: new FormArray(controls)
-                            });
-                            this.formA[i] = this.form;
-                            i++;
-                        });
-                });
+                this.dataSource = new MatTableDataSource(user);
             });
     }
 
@@ -85,13 +74,54 @@ export class UsersComponent implements OnInit, OnDestroy {
         }
     }
 
+    deleteUser(id) {
+        const dialogRef = this.dialog.open(AlertComponent, {
+            data: {
+              icon: 'exclamation-circle',
+              iconColor: 'failure',
+              title: '¿Deseas borrar este usuario?',
+              text: 'No seras capaz de deshacer esta acción',
+              options: true
+            }
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+              this.userdetailservice.deleteUser(id).subscribe();
+                this.dialog.open(AlertComponent, {
+                    data: {
+                      icon: 'check-circle',
+                      iconColor: 'success',
+                      title: 'Borrado',
+                      text: 'El usuario ha sido borrado',
+                      button: 'OK'
+                    }
+                  });
+              
+            } else {
+              this.dialog.open(AlertComponent, {
+                data: {
+                  icon: 'times-circle',
+                  iconColor: 'failure',
+                  title: 'Cancelado',
+                  text: 'El usuario no ha sido borrado',
+                  button: 'OK'
+                }
+              });
+            }
+          });
+    }
+
     registerModal(user: UserDetail): void {
-       
         const dialogRef = this.dialog.open(RegisterModalComponent,{
             data: {
              user
             }
           });
+    }
+
+    newUserModal(): void {
+        const dialogRef = this.dialog.open(NewUserComponent);
+
     }
 
     onSubmit(userId, formA: FormGroup) {

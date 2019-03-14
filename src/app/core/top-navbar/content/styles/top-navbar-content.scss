@@ -24,6 +24,19 @@
   }
 }
 
+.navbar-brand {
+  display: flex;
+  height: 3rem;
+  padding: 0px;
+  margin: 0px;
+
+  .brand-logo {
+    width: auto;
+    height: 100%;
+    padding-left: 30px;
+  }
+}
+
 app-top-navbar-content {
   align-items: center;
   display: flex;
@@ -46,6 +59,7 @@ app-top-navbar-content {
       top: 0;
       transition: left .2s;
       width: 36px;
+      margin-left: 10px;
 
       .fa {
         font-size: 20px;
@@ -53,7 +67,7 @@ app-top-navbar-content {
 
       &.menu-hidden {
         left: -14px;
-
+        
         &:not(:focus) {
           &:hover {
             left: -6px;

@@ -4,7 +4,7 @@
 
 #dashboard {
   .list-dashboard {
-    background-image: linear-gradient(95deg, $aqua, $purple);
+    background-image: linear-gradient(95deg, $azulMarino, $purple);
     color: $white;
 
     .list-image-circle {
@@ -75,7 +75,7 @@
       }
 
       .list-single-action {
-        @include button($white, $aqua, $aqua);
+        @include button($white, $azulMarino, $azulMarino);
         opacity: 1;
       }
     }
@@ -172,7 +172,7 @@
     }
 
     .orders-number {
-      color: $aqua;
+      color: $azulMarino;
       display: block;
       font-size: $font-size-lg;
       font-weight: 900;
@@ -194,8 +194,8 @@
       }
 
       &.mat-button-toggle-checked {
-        background-color: $aqua;
-        border-color: $aqua;
+        background-color: $azulMarino;
+        border-color: $azulMarino;
       }
     }
 

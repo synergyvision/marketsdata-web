@@ -1,9 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { UserDetail } from '../models/userDetail';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { User } from '../models/user';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+  })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +22,10 @@ export class UserdetailService {
   public users: Observable<UserDetail[]>;
   public userDoc: AngularFirestoreDocument<UserDetail>;
   public user: Observable<UserDetail>;
+  public userUrl = `http://localhost:3000/user`;
 
     constructor( 
+        private http: HttpClient,
         private afs: AngularFirestore,
         private afAuth: AngularFireAuth
         ) {
@@ -39,7 +49,7 @@ export class UserdetailService {
         return this.userDoc;
     }
 
-    getUserDetail(idUser: string){
+    getUserDetail(idUser: string) {
       this.userDoc = this.afs.doc<UserDetail>(`userdetails/${idUser}`);
       return this.user = this.userDoc.snapshotChanges().pipe(map(action => {
         if (action.payload.exists === false) {
@@ -52,9 +62,44 @@ export class UserdetailService {
       }));
     }
 
-    insertUserDetails(user: UserDetail){
-        let currentUser = this.afAuth.auth.currentUser;
-        let userId = currentUser.uid;
+    insertUserDetails(user: UserDetail, userId){
         this.usersCollection.doc(userId).set(user);
     }
+
+    addUser (user: User): Observable<User> {
+      return this.http.post<User>(this.userUrl, user, httpOptions)
+        .pipe(
+          catchError(this.handleError)
+        );
+    }
+
+    deleteUser (id: string): Observable<any> {
+      this.deleteUserDetail(id);
+      const url = `${this.userUrl}/${id}`; 
+      return this.http.delete(url, httpOptions)
+        .pipe(
+          catchError(this.handleError)
+        );
+    }
+
+    deleteUserDetail(idUser) {
+      this.userDoc = this.afs.doc<UserDetail>(`userdetails/${idUser}`);
+      this.userDoc.delete();
+    }
+
+    private handleError(error: HttpErrorResponse) {
+      if (error.error instanceof ErrorEvent) {
+       
+        console.error('An error occurred:', error.error.message);
+      } else {
+        // The backend returned an unsuccessful response code.
+        // The response body may contain clues as to what went wrong,
+        console.error(
+          `Backend returned code ${error.status}, ` +
+          `body was: ${error.error.code}`);
+      }
+      // return an observable with a user-facing error message
+      return throwError(
+        `${error.error.code}`);
+    };
 }

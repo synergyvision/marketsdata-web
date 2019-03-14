@@ -2,6 +2,9 @@
   <button type="button" (click)="toggleSideMenu()" class="menu-toggle" [ngClass]="{ 'menu-visible': sideMenuVisible, 'menu-hidden': !sideMenuVisible }">
     <i class="fa fa-bars"></i>
   </button>
+  <a class="navbar-brand" [routerLink]="['/']">
+    <img class="brand-logo" alt="SYNERGY RANKING" title="SYNERGY RANKING" src="../../../../assets/imgs/synergy-vision-white.png">
+  </a>
   <!-- <div class="brand-wrapper">
     <img class="brand-logo" [src]="baseUrl + '/assets/imgs/angular.svg'" alt="Angular">
     <h3 class="brand-name">Admin Template</h3>

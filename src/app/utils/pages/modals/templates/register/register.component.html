@@ -7,12 +7,8 @@
         <span id="name" class="form-control">{{user.name}} {{user.lastName}}</span>
       </div>
       <div class="user-data-section">
-        <span class="text">Trabajo</span>
-        <span id="name" class="form-control">{{user.job}}</span>
-      </div>
-      <div class="user-data-section">
-        <span class="text">Edad</span>
-        <span id="name" class="form-control">{{user.age}}</span>
+        <span class="text">Correo</span>
+        <span id="name" class="form-control">{{user.email}}</span>
       </div>
     </form>
     <div class="register-divider">
@@ -29,7 +25,8 @@
       </label>
       <hr>
       <div class="col-md-12 ">
-          <button type="submit" class="btn btn-primary">Guardar</button>
+          <input class="btn btn-form" type="submit" value="GUARDAR" [disabled]="!form.valid">&nbsp;
+          <input class="btn btn-form" (click)="onNoClick()" type="reset" value="CANCELAR">
       </div>
       
     </form>

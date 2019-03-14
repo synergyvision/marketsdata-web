@@ -6,7 +6,7 @@ import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms';
 import { IndicatorsService } from '../../../../../services/indicators.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-
+import { NotificationsPageComponent } from '../../../notifications/notifications.page.component';
 @Component({
   selector: 'app-modal-register',
   templateUrl: 'register.component.html',
@@ -29,6 +29,7 @@ export class RegisterModalComponent implements OnInit, OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     public indicatorService: IndicatorsService,
+    public notificacion: NotificationsPageComponent
   ) {
     this.user = data.user;
     const controls = this.orders.map(c => new FormControl(false));
@@ -79,9 +80,17 @@ onSubmit(userId, formA: FormGroup) {
                   i++;
               }
           }
-          if (!(typeof (this.selectedUserIndicator.indicator1.enable) == "undefined"))
-              this.indicatorService.updatetUserIndicators(this.selectedUserIndicator);
+          if (!(typeof (this.selectedUserIndicator.indicator1.enable) == "undefined")){
+            this.indicatorService.updatetUserIndicators(this.selectedUserIndicator);
+            this.notificacion.showNotification('top', 'center', 'success', 'check-square','Cambios guardados con exito');
+            this.dialogRef.close();
+          }
+              
       });
+}
+
+onNoClick(){
+  this.dialogRef.close();
 }
 }
 

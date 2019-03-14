@@ -83,8 +83,8 @@ export class AlertsPageComponent {
       data: {
         icon: 'exclamation-circle',
         iconColor: 'failure',
-        title: 'Do you want to delete your file?',
-        text: 'You will not be able to recover it',
+        title: '¿Deseas borrar este usuario?',
+        text: 'No seras capaz de deshacer esta acción',
         options: true
       }
     });

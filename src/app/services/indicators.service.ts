@@ -47,9 +47,8 @@ export class IndicatorsService {
       }));
     }
 
-    insertUserIndicators(indicator: Indicator){
-      let currentUser = this.afAuth.auth.currentUser;
-      let userId = currentUser.uid;
+    insertUserIndicators(indicator: Indicator, userId){
+      
       this.indicatorsCollection.doc(userId).set(indicator);
     }
 

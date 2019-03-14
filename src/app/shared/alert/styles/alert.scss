@@ -24,7 +24,7 @@
     text-align: center;
 
     &.alert-modal-icon-success {
-      color: $aqua;
+      color: $azulMarino;
     }
 
     &.alert-modal-icon-failure {
@@ -38,7 +38,7 @@
     justify-content: center;
 
     .alert-modal-button {
-      @include button($white, $purple, $purple);
+      @include button($white, $azulMarino, $azulMarino);
       margin-bottom: 10px;
       margin-top: 40px;
       min-width: 60px;
@@ -46,7 +46,7 @@
       width: 60%;
 
       &.alert-modal-button-success {
-        @include button($white, $aqua, $aqua);
+        @include button($white, $azulMarino, $azulMarino);
         margin-right: 10px;
       }
 

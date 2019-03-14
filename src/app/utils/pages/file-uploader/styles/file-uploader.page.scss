@@ -15,8 +15,8 @@ input {
   }
 
   .dropzone {
-    border: 2px dashed $aqua;
-    color: $aqua;
+    border: 2px dashed $azulMarino;
+    color: $azulMarino;
     font-size: $font-size-md;
     font-weight: bold;
     margin-bottom: 30px;
@@ -47,7 +47,7 @@ input {
       }
 
       .btn-upload {
-        @include button($white, $aqua, $aqua);
+        @include button($white, $azulMarino, $azulMarino);
         max-width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -63,7 +63,7 @@ input {
           width: 95px;
 
           &.btn-image-cancel {
-            @include button($white, $aqua, $aqua);
+            @include button($white, $azulMarino, $azulMarino);
             margin-right: 15px;
           }
 
@@ -103,7 +103,7 @@ input {
       width: 220px;
 
       &.done {
-        @include button($white, $aqua, $aqua);
+        @include button($white, $azulMarino, $azulMarino);
       }
     }
   }

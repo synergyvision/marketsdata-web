@@ -9,6 +9,7 @@ import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { Company } from '../models/company';
 import { FormGroup, FormBuilder, FormControl, AbstractControl, ValidatorFn } from '@angular/forms';
 import { SectorService } from '../services/sector.service';
+import { NotificationsPageComponent } from '../utils';
 
 @Component({
   selector: 'app-blank-page',
@@ -40,7 +41,8 @@ export class BlankPageComponent implements OnInit, OnDestroy {
         public afAuth: AngularFireAuth,
         public route: ActivatedRoute,
         public formBuilder: FormBuilder,
-        public sectorService: SectorService
+        public sectorService: SectorService,
+        public notificacion: NotificationsPageComponent
         ) {
           this.form = formBuilder.group({
             exchange: new FormControl(''),
@@ -127,6 +129,8 @@ export class BlankPageComponent implements OnInit, OnDestroy {
     }
 
     onSubmit() {
+     
+      
       this.dataFijaMovil = [];
       this.dataMovil = [];
       let marketcap = parseInt(this.form.value.marketcap);
@@ -168,6 +172,8 @@ export class BlankPageComponent implements OnInit, OnDestroy {
       }
         this.dataSource1 = new MatTableDataSource(this.dataMovil);
         this.dataSource1.paginator = this.paginator;
+
+        this.notificacion.showNotification('top', 'center', 'success', 'check-square','Filtros aplicados');
     }
 
     resetForm(){
@@ -186,6 +192,8 @@ export class BlankPageComponent implements OnInit, OnDestroy {
       }
       this.dataSource1 = new MatTableDataSource(this.dataMovil);
       this.dataSource1.paginator = this.paginator;
+
+      this.notificacion.showNotification('top', 'center', 'success', 'check-square','Filtros reseteados');
     }
 
     getParamsIndicators() {
