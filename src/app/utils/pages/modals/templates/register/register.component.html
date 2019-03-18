@@ -18,7 +18,8 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit(user.id,form)" class="row">
       <label formArrayName="orders" *ngFor="let order of form.controls.orders.controls; let i = index" class="col-md-6">
         <div class="pull-left">{{orders[i].name}}</div>
-        <div class="pull-right"><mat-slide-toggle disableRipple class="mat-override" [formControlName]="i">
+        <div class="pull-right">
+          <mat-slide-toggle disableRipple class="mat-override" [formControlName]="i">
             <span class="mat-slide-toggle-label-on"><i class="fa fa-check"></i></span>
             <span class="mat-slide-toggle-label-off"><i class="fa fa-times"></i></span>
           </mat-slide-toggle></div>

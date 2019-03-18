@@ -3,6 +3,7 @@ import { Router, ActivatedRoute,  ParamMap  } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Subject } from 'rxjs';
 import { takeUntil, switchMap } from 'rxjs/operators';
+import { CompanyService } from '../services/company.service';
 
 
 @Component({
@@ -14,25 +15,30 @@ export class CompanyComponent implements OnInit, OnDestroy{
     
     private ngUnsubscribe = new Subject();
     company: string;
-    
+    companyDetail: any = {};
     constructor(public router: Router,
-        public afAuth: AngularFireAuth, public route: ActivatedRoute){
+        public afAuth: AngularFireAuth, public route: ActivatedRoute,
+        public companyService: CompanyService
+        ){
             
-                this.company = this.route.snapshot.paramMap.get('id');
-                console.log(this.company);
+            this.company = this.route.snapshot.paramMap.get('id');
+            this.getCompany();
                 
             
         }
     
     ngOnInit() {
-        this.route.paramMap.pipe(
-            switchMap((params: ParamMap) =>
-                this.company = params.get('id'))
-          );
     }
 
     ngOnDestroy() {
         this.ngUnsubscribe.next();
         this.ngUnsubscribe.complete();
+    }
+
+    getCompany(){
+        this.companyService.getCompany(this.company).subscribe((company)=>{
+            this.companyDetail = company;
+            
+        })
     }
 }

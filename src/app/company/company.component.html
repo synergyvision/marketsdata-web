@@ -1,11 +1,97 @@
 <div class="row grid grid-5">
     <div class="col-xs-12">
-      <h2 class="grid-title">Grid 6</h2>
+      <h2 class="grid-title">{{companyDetail.name}}</h2>
     </div>
     <div class="col-xs-6">
-      <div class="card card-4"></div>
+      <div class="card card-4">
+        <header class="row title">
+        <div class="col-xs-12">
+            <h2 class="main-title">Quote</h2>
+            <hr class="line">
+        </div>
+       </header>
+       <div class="row mar">
+        <div class="col-sm-6"><label>Symbol: </label><span>{{companyDetail.symbol}}</span></div>
+        <div class="col-sm-6" ><label>Sector: </label><span>{{companyDetail.sector}}</span></div>
+      </div>
+      <div class="row mar">
+        <div class="col-sm-6"><label>Exchange: </label><span>{{companyDetail.exchange}}</span></div>
+        <div class="col-sm-6" ><label>Open: </label><span>{{companyDetail.open}}</span></div>
+      </div>
+      <div class="row mar">
+        <div class="col-sm-6"><label>Close: </label><span>{{companyDetail.close}}</span></div>
+        <div class="col-sm-6" ><label>High: </label><span>{{companyDetail.high}}</span></div>
+      </div>
+      <div class="row mar">
+        <div class="col-sm-6"><label>Low: </label><span>{{companyDetail.low}}</span></div>
+        <div class="col-sm-6" ><label>Lastest price: </label><span>{{companyDetail.latestPrice}}</span></div>
+      </div>
+      <div class="row mar">
+        <div class="col-sm-6"><label>MarketCap: </label><span>{{companyDetail.marketCap}}</span></div>
+        
+      </div>
+      </div>
     </div>
     <div class="col-xs-6">
-      <div class="card card-4"></div>
+      <div class="card card-4">
+          <header class="row title">
+              <div class="col-xs-12">
+                  <h2 class="main-title">Stats</h2>
+                  <hr class="line">
+              </div>
+             </header>
+             <div class="row mar">
+                <div class="col-sm-6"><label>Beta: </label><span>{{companyDetail.beta}}</span></div>
+                <div class="col-sm-6" ><label>Week 52 High: </label><span>{{companyDetail.week52high}}</span></div>
+              </div>
+              <div class="row mar">
+                <div class="col-sm-6"><label>Week 52 low: </label><span>{{companyDetail.week52low}}</span></div>
+                <div class="col-sm-6" ><label>Week 52 change: </label><span>{{companyDetail.week52change}}</span></div>
+              </div>
+              <div class="row mar">
+                  <div class="col-sm-6"><label>Dividend Rate: </label><span>{{companyDetail.dividendRate}}</span></div>
+                  <div class="col-sm-6" ><label>Dividend Yield: </label><span>{{companyDetail.dividendYield}}</span></div>
+                </div>
+              <div class="row mar">
+                  <div class="col-sm-6"><label>Latest EPS: </label><span>{{companyDetail.latestEPS}}</span></div>
+                  <div class="col-sm-6" ><label>Shares Outstanding: </label><span>{{companyDetail.sharesOutstanding}}</span></div>
+              </div>
+              <div class="row mar">
+                  <div class="col-sm-6"><label>Float: </label><span>{{companyDetail.float}}</span></div>
+                  <div class="col-sm-6" ><label>Return On Equity: </label><span>{{companyDetail.returnOnEquity}}</span></div>
+              </div>
+              <div class="row mar">
+                  <div class="col-sm-6"><label>Consensus EPS: </label><span>{{companyDetail.consensusEPS}}</span></div>
+                  <div class="col-sm-6" ><label>Number Of Estimates: </label><span>{{companyDetail.numberOfEstimates}}</span></div>
+              </div>
+              <div class="row mar">
+                  <div class="col-sm-6"><label>EPS: </label><span>{{companyDetail.ttmEps}}</span></div>
+                  <div class="col-sm-6" ><label>P/E ratio high: </label><span>{{companyDetail.peRatioHigh}}</span></div>
+              </div>
+              <div class="row mar">
+                  <div class="col-sm-6"><label>P/E ratio low: </label><span>{{companyDetail.peRatioLow}}</span></div>
+                  <div class="col-sm-6" ><label>Return on Assets: </label><span>{{companyDetail.returnOnAssets}}</span></div>
+              </div>
+              <div class="row mar">
+                  <div class="col-sm-6"><label>Profit Margin: </label><span>{{companyDetail.profitMargin}}</span></div>
+                  <div class="col-sm-6" ><label>Price to sales: </label><span>{{companyDetail.priceToSales}}</span></div>
+              </div>
+              <div class="row mar">
+                  <div class="col-sm-6"><label>Price to book: </label><span>{{companyDetail.priceToBook}}</span></div>
+                  <div class="col-sm-6" ><label>Day 200 moving Avg: </label><span>{{companyDetail.day200MovingAvg}}</span></div>
+              </div>
+              <div class="row mar">
+                  <div class="col-sm-6"><label>Institution Percent: </label><span>{{companyDetail.institutionPercent}}</span></div>
+                  <div class="col-sm-6" ><label>Insider Percent: </label><span>{{companyDetail.insiderPercent}}</span></div>
+              </div>
+              <div class="row mar">
+                  <div class="col-sm-6"><label>Year 5 change percent: </label><span>{{companyDetail.year5ChangePercent}}</span></div>
+                  <div class="col-sm-6" ><label>Year 2 change percent: </label><span>{{companyDetail.year2ChangePercent}}</span></div>
+              </div>
+              <div class="row mar">
+                  <div class="col-sm-6"><label>Year 1 change percent: </label><span>{{companyDetail.year1ChangePercent}}</span></div>
+                  <div class="col-sm-6" ><label>YTD change percent: </label><span>{{companyDetail.ytdChangePercent}}</span></div>
+              </div>
+      </div>
     </div>
   </div>

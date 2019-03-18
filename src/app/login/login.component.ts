@@ -91,24 +91,8 @@ export class LoginComponent implements OnInit {
     loginUser() {
         this.authService.loginUser(this.formLogin.get('email').value, this.formLogin.get('password').value)
         .then(() => {
-         let user = this.afAuth.auth.currentUser;
-         let userId = user.uid;
-         let userdetail = this.userDetailService.getUserDetailWithoutId(userId);
-         userdetail.get().pipe(takeUntil(this.ngUnsubscribe))
-          .subscribe(user =>{
-            this.userD = user.data();
-
-            if(!this.userD.admin) {
-              this.notificacion.showNotification('top', 'center', 'danger', 'times-circle','No puedes ingresar a esta pagina');
-                this.authService.logoutUser()
-                .then(() => {
-                    this.router.navigate(['/login']);
-              }).catch(error => console.log(error));
-            } else {
-              this.notificacion.showNotification('top', 'center', 'success', 'check-square','Has ingresado correctamente');
-              this.router.navigate(['/']);
-            }
-          });
+          this.notificacion.showNotification('top', 'center', 'success', 'check-square','Has ingresado correctamente');
+          this.router.navigate(['/']);
         })
         .catch(error => {
               if(error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {

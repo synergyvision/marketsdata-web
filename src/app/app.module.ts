@@ -18,10 +18,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 import { AuthGuard } from './auth/auth.guard';
-import { ChangePasswordComponent } from './change-password/change-password.component';
+
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { RegisterModalComponent } from './utils/pages/modals/templates/register/register.component';
 import { NewUserComponent } from './utils/pages/modals/templates/newuser/newuser.component';
+import { ChangePasswordComponent } from './utils/pages/modals/templates/change-password/change-password.component';
+import { ChangeEmailComponent } from './utils/pages/modals/templates/change-email/change-email.component';
 import { NotificationsPageComponent } from './utils';
 import { RegisterComponent } from './register/register.component';
 
@@ -34,10 +36,13 @@ import { RegisterComponent } from './register/register.component';
     RecoverPasswordComponent,
     ChangePasswordComponent,
     RegisterModalComponent,
-    NewUserComponent
+    NewUserComponent,
+    ChangeEmailComponent
   ],
   entryComponents: [RegisterModalComponent,
-  NewUserComponent],
+  NewUserComponent,
+  ChangePasswordComponent,
+  ChangeEmailComponent],
   imports: [
     BrowserModule.withServerTransition({appId: 'my-app'}),
     AngularFireModule.initializeApp(environment.firebase),
