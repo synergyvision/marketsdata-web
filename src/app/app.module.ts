@@ -26,6 +26,7 @@ import { ChangePasswordComponent } from './utils/pages/modals/templates/change-p
 import { ChangeEmailComponent } from './utils/pages/modals/templates/change-email/change-email.component';
 import { NotificationsPageComponent } from './utils';
 import { RegisterComponent } from './register/register.component';
+import { EditPerfilComponent } from './utils/pages/modals/templates/edit-perfil/edit-perfil.component'
 
 
 @NgModule({
@@ -37,12 +38,14 @@ import { RegisterComponent } from './register/register.component';
     ChangePasswordComponent,
     RegisterModalComponent,
     NewUserComponent,
-    ChangeEmailComponent
+    ChangeEmailComponent,
+    EditPerfilComponent
   ],
   entryComponents: [RegisterModalComponent,
   NewUserComponent,
   ChangePasswordComponent,
-  ChangeEmailComponent],
+  ChangeEmailComponent,
+  EditPerfilComponent],
   imports: [
     BrowserModule.withServerTransition({appId: 'my-app'}),
     AngularFireModule.initializeApp(environment.firebase),

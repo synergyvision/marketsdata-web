@@ -34,15 +34,6 @@ export class LoginComponent implements OnInit {
         admin: true
     };
 
-    indicator: Indicator ={
-      id: '',
-      indicator1: {name: 'Earning Yield', enable: true, value: 'earningYield'},
-      indicator2: {name: 'Price to Earnings', enable: true, value: 'peRatio'},
-      indicator3: {name: 'Return on Equity', enable: true, value:'returnOnEquity'},
-      indicator4: {name: 'Return on Assets', enable: true, value: 'returnOnAssets'},
-      //indicator5: {name: 'Return on Capital', enable: true},
-    }
-
     validationMessages = {
       email: [
         { type: 'required', message: 'El correo es obligatorio.' },
@@ -75,18 +66,6 @@ export class LoginComponent implements OnInit {
       }
 
     ngOnInit() {}
-
-    createUser(){
-      this.authService.registerUser( this.user.email, this.userSignUp.password )
-      .then(() => {
-          let currentUser = this.afAuth.auth.currentUser;
-          let userId = currentUser.uid;
-          this.userDetailService.insertUserDetails(this.user, userId);
-          this.indicatorService.insertUserIndicators(this.indicator, userId);
-          this.router.navigate(['/']);
-      })
-      .catch(error => console.log(error));
-    }
 
     loginUser() {
         this.authService.loginUser(this.formLogin.get('email').value, this.formLogin.get('password').value)

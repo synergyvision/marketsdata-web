@@ -1,0 +1,23 @@
+<div class="modal-login">
+    <div class="modal-login-form">
+        <h2 class="modal-title">Editar Perfil</h2>
+        <div class="col-md-12">
+                  <form class="form-horizontal" [formGroup]="form" (ngSubmit)="updateDetails()">
+                    <input type="text" class="form-control" placeholder="NOMBRE" formControlName="name" name="nombre">
+                    <input type="text" class="form-control" placeholder="APELLIDO" formControlName="lastName" name="apellido">     
+                    <div class="form-group">
+                      <div class="col-xs-12">
+                        <span class="help-block"><em>*</em> Campos obligatorios.</span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12 text-center">
+                            <input class="btn btn-form" type="submit" value="GUARDAR CAMBIOS" [disabled]="!form.valid">&nbsp;
+                            <input class="btn btn-form" (click)="onNoClick()" type="reset" value="CANCELAR">
+                        </div>
+                    </div>
+                  </form>
+                 
+              </div>
+    </div>
+</div>

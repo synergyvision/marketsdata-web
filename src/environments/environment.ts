@@ -6,11 +6,18 @@
 export const environment = {
   production: false,
   BASE_URL: 'http://localhost:4200',
+  // firebase: {
+  // apiKey: 'AIzaSyCV6OUPuTWfTsOEf4aqpmV30swelOmelD0',
+  // authDomain: 'marketsdata-vision.firebaseapp.com',
+  // databaseURL: 'https://marketsdata-vision.firebaseio.com',
+  // projectId: 'marketsdata-vision',
+  // storageBucket: 'marketsdata-vision.appspot.com',
+  // messagingSenderId: '619198630822'}
   firebase: {
-  apiKey: 'AIzaSyCV6OUPuTWfTsOEf4aqpmV30swelOmelD0',
-  authDomain: 'marketsdata-vision.firebaseapp.com',
-  databaseURL: 'https://marketsdata-vision.firebaseio.com',
-  projectId: 'marketsdata-vision',
-  storageBucket: 'marketsdata-vision.appspot.com',
-  messagingSenderId: '619198630822'}
+    apiKey: "AIzaSyBFc6CmLLZYliPnvhk8Bwdoz0dYuveHGRE",
+    authDomain: "market-datamanu.firebaseapp.com",
+    databaseURL: "https://market-datamanu.firebaseio.com",
+    projectId: "market-datamanu",
+    storageBucket: "market-datamanu.appspot.com",
+    messagingSenderId: "157510666122"}
 };

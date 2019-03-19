@@ -3,9 +3,11 @@ import { RouterModule } from '@angular/router';
 import { PerfilComponent } from './perfil.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PerfilResolver } from './perfil.resolver';
 
 export const PerfilRoutes = [
-  { path: '', component: PerfilComponent }
+  { path: '', component: PerfilComponent, resolve: { userData: PerfilResolver
+  } }
 ];
 
 @NgModule({
@@ -18,6 +20,6 @@ export const PerfilRoutes = [
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [PerfilComponent]
+  providers: [PerfilComponent, PerfilResolver]
 })
 export class PerfilModule { }
