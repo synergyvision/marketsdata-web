@@ -106,6 +106,10 @@ export class RegisterComponent implements OnInit {
           this.notificacion.showNotification('top', 'center', 'success', 'check-square','Usuario creado con exito');
           this.router.navigate(['/']);
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        if(error.code == 'auth/email-already-in-use'){
+          this.notificacion.showNotification('top', 'center', 'danger', 'times-circle','Ya existe un usuario con ese correo');
+        }
+      });
     }
 }
