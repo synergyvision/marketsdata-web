@@ -27,11 +27,6 @@ import { HttpClientModule } from '@angular/common/http';
     TransferHttpCacheModule
   ],
   bootstrap: [FrontPageComponent],
-  providers: [
-    {
-      provide: APP_BASE_HREF,
-      useValue: `${environment.BASE_URL}`
-    }
-  ]
+  providers: []
 })
 export class FrontPageModule { }

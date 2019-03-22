@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NotificationsPageComponent } from '../utils';
+import { APP_BASE_HREF } from '@angular/common';
 
 @Component({
   selector: 'app-recover-password',
@@ -12,7 +13,7 @@ import { NotificationsPageComponent } from '../utils';
 export class RecoverPasswordComponent implements OnInit {
   public form: FormGroup;
   user: any = {};
-
+  baseUrl = '';
   validationMessages = {
     email: [
       { type: 'required', message: 'El correo es obligatorio.' },
@@ -20,11 +21,14 @@ export class RecoverPasswordComponent implements OnInit {
     ]
   };
 
-  constructor(public router: Router,
+  constructor(
+    @Inject(APP_BASE_HREF) private baseHref: string,
+    public router: Router,
     public afAuth: AngularFireAuth,
     public formBuilder: FormBuilder,
     public notificacion: NotificationsPageComponent
     ) {
+      this.baseUrl = baseHref;
       this.form = formBuilder.group({
         email: new FormControl('', Validators.compose([
           Validators.email,

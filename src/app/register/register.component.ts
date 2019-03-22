@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -12,6 +12,7 @@ import { IndicatorsService } from '../services/indicators.service';
 
 import { NotificationsPageComponent } from '../utils';
 import { takeUntil } from 'rxjs/operators';
+import { APP_BASE_HREF } from '@angular/common';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -24,7 +25,7 @@ export class RegisterComponent implements OnInit {
     public usersCollection: AngularFirestoreCollection<UserDetail>;
     public users: Observable<UserDetail[]>;
     public userD: any = {};
-
+    baseUrl = '';
     user: UserDetail = {
         id: '',
         name: '',
@@ -69,6 +70,7 @@ export class RegisterComponent implements OnInit {
     };
 
     constructor(
+      @Inject(APP_BASE_HREF) private baseHref: string,
       public notificacion: NotificationsPageComponent,
       public indicatorService: IndicatorsService,
       public userDetailService: UserdetailService,
@@ -78,6 +80,7 @@ export class RegisterComponent implements OnInit {
       private authService: AuthService,
       public router: Router
       ) {
+        this.baseUrl = baseHref;
         this.form = formBuilder.group({
           email: new FormControl('', Validators.compose([
             Validators.email,
