@@ -10,7 +10,7 @@ export const LoginRoutes = [
 
 @NgModule({
   declarations: [
-    LoginComponent
+    
   ],
   imports: [
     RouterModule.forChild(LoginRoutes),

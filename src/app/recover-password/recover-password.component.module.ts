@@ -8,7 +8,7 @@ export const RecoverPasswordRoutes = [
 
 @NgModule({
   declarations: [
-    RecoverPasswordComponent
+    
   ],
   imports: [
     RouterModule.forChild(RecoverPasswordRoutes)

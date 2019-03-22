@@ -10,7 +10,7 @@ export const RegisterRoutes = [
 
 @NgModule({
   declarations: [
-    RegisterComponent
+    
   ],
   imports: [
     RouterModule.forChild(RegisterRoutes),

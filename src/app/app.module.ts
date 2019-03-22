@@ -20,7 +20,7 @@ import { RecoverPasswordComponent } from './recover-password/recover-password.co
 import { AuthGuard } from './auth/auth.guard';
 
 import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { RegisterModalComponent } from './utils/pages/modals/templates/register/register.component';
+
 import { NewUserComponent } from './utils/pages/modals/templates/newuser/newuser.component';
 import { ChangePasswordComponent } from './utils/pages/modals/templates/change-password/change-password.component';
 import { ChangeEmailComponent } from './utils/pages/modals/templates/change-email/change-email.component';
@@ -36,12 +36,12 @@ import { EditPerfilComponent } from './utils/pages/modals/templates/edit-perfil/
     RegisterComponent,
     RecoverPasswordComponent,
     ChangePasswordComponent,
-    RegisterModalComponent,
+  
     NewUserComponent,
     ChangeEmailComponent,
     EditPerfilComponent
   ],
-  entryComponents: [RegisterModalComponent,
+  entryComponents: [
   NewUserComponent,
   ChangePasswordComponent,
   ChangeEmailComponent,
